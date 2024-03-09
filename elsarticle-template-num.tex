@@ -1,0 +1,247 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+\documentclass[5p,times]{elsarticle}
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Nuclear Physics B}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+
+\title{Counterfactual Explanations for Time Series Regression}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[inst1]{Alexis Tabin}
+
+\affiliation[inst1]{organization={Department of Computer Science},%Department and Organization
+            addressline={ETH Zürich}, 
+            city={Zürich},
+            country={Switzerland}}
+
+\author[inst2]{Patrick Langer}
+
+\affiliation[inst2]{organization={Center for Digital Health Interventions},%Department and Organization
+            addressline={Department of Management, Technology, and Economics}, 
+            city={ETH Zurich},
+            state={Zurich},
+            country={Switzerland}}
+
+\begin{abstract}
+
+% Pyrkov
+% Age-related physiological changes in humans are linearly associated with age. Naturally, linear combinations of physiological measures trained to estimate chronological age have recently emerged as a practical way to quantify aging in the form of biological age. In this work, we used one-week long physical activity records from a 2003–2006 National Health and Nutrition Examination Survey (NHANES) to compare three increasingly accurate biological age models: the unsupervised Principal Components Analysis (PCA) score, a multivariate linear regression, and a state-of-the-art deep convolutional neural network (CNN). We found that the supervised approaches produce better chronological age estimations at the expense of a loss of the association between the aging acceleration and all-cause mortality. Consequently, we turned to the NHANES death register directly and introduced a novel way to train parametric proportional hazards models suitable for out-of-the-box implementation with any modern machine learning software. As a demonstration, we produced a separate deep CNN for mortality risks prediction that outperformed any of the biological age or a simple linear proportional hazards model. Altogether, our findings demonstrate the emerging potential of combined wearable sensors and deep learning technologies for applications involving continuous health risk monitoring and real-time feedback to patients and care providers. \\
+
+% %% Syed Ashiqur Rahman
+% Recent research highlights the need for a correct instrument for monitoring individual health status, especially in the elderly. Different definitions of biological ageing have been proposed, with a consistent positive association of physical activity and physical fitness with decelerated ageing trajectories. The six-minute walking test is considered the current gold standard for estimating the individual fitness status of the elderly.
+
+% Human age estimation is an important and difficult challenge. Different biomarkers and numerous approaches have been studied for biological age estimation, each with its advantages and limitations. In this work, we investigate whether physical activity can be exploited for biological age estimation for adult humans. We introduce an approach based on deep convolutional long short term memory (ConvLSTM) to predict biological age, using human physical activity as recorded by a wearable device.  the NHANES physical activity dataset. This work has significant implications in combining wearable sensors and deep learning techniques for improved health monitoring, for instance, in a mobile health environment. Mobile health (mHealth) applications provide patients, caregivers, and administrators continuous information about a patient, even outside the hospital.
+% \\
+
+% %Jinjoo Shim
+% Repeated disruptions in circadian rhythms are associated with implications for health outcomes and longevity. The utilization of wearable devices in quantifying circadian rhythm to elucidate its connection to longevity, through continuously collected data remains largely unstudied. In this work, we investigate a data-driven segmentation of the 24-h accelerometer activity profiles from wearables as a novel digital biomarker for longevity in 7,297 U.S. adults from the 2011–2014 National Health and Nutrition Examination Survey. Using hierarchical clustering, we identified five clusters and described them as follows: \textit{High activity}, \textit{Low activity}, \textit{Mild circadian rhythm (CR) disruption”}, \textit{Severe CR disruption}, and \textit{Very low activity}.
+% Young adults with extreme CR disturbance are seemingly healthy with few comorbid conditions, but in fact associated with higher white blood cell, neutrophils, and lymphocyte counts  Older adults with CR disruption are significantly associated with increased systemic inflammation indexes , biological aging advance , and all-cause mortality risk. Our findings highlight the importance of circadian alignment on longevity across all ages and suggest that data from wearable accelerometers can help in identifying at-risk populations and personalize treatments for healthier aging. \\
+
+% % Höllig
+% With the increasing predominance of deep learning
+% methods on time series classification, interpretability becomes
+% essential, especially in high-stake scenarios. Although many
+% approaches to interpretability have been explored for images
+% and tabular data, time series data has been mostly neglected. We
+% approach the problem of interpretability by proposing TSEvo,
+% a model-agnostic multiobjective evolutionary approach to time
+% series counterfactuals incorporating a variety of time series
+% transformation mechanisms to cope with different types and
+% structures of time series.
+
+% By ChatGPT
+% Understanding the complex relationship between physical activity and biological aging is crucial for promoting healthy aging
+% and mitigating age-related health risks. In this paper, we explore the use of time series regression analysis to predict biological age
+% from longitudinal physical activity data. Leveraging data from the National Health and Nutrition Examination Survey (NHANES),
+% we compare the performance of three biological age models: a vanilla CNN, an adaptation of a Convolutional Long short-term
+% memory (ConvLSTM) to time series, and a Temporal Convolutional Network (TCN). To address this, we propose a novel approach
+% utilizing counterfactual explanations to enhance the interpretability of the predictive model. By examining how changes in physical
+% activity affect biological age predictions, we provide valuable insights into the causal mechanisms underlying the aging process.
+% Our findings highlight the importance of incorporating interpretability into time series regression models for predicting biological
+% age, thus enabling personalized interventions and health monitoring strategies. Through the integration of wearable sensors and
+% deep learning techniques, our research contributes to the advancement of continuous health risk monitoring and real-time feedback,
+% paving the way for improved health outcomes and quality of life across diverse populations.
+\begin{itemize}
+    \item Digital biomarkers can be used to monitor health status
+    \item Recent studies have shown that Physical Activity can be used to estimate the Biological Age
+    \item The use of time-series regression to predict biological age requires large deep-learning models.
+    \item Those models are like big black boxes that are hard to understand.
+    \item In healthcare, understanding how DL models are making their decisions is key.
+    \item For this reason, the explainability of DL models is important.
+    \item In this paper, we explain DL models used to predict BA from time-series representing the weekly PA.
+    \item To do so, we used counterfactuals.
+    
+\end{itemize}
+
+\end{abstract}
+
+%%Graphical abstract
+% \begin{graphicalabstract}
+% \includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+% \begin{highlights}
+% \item Research highlight 1
+% \item Research highlight 2
+% \end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations
+%% PACS codes here, in the form: \PACS code \sep code
+% \PACS 0000 \sep 1111
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+% \MSC 0000 \sep 1111
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}
+\label{sec:sample1}
+Some intro
+
+\section{Related Work}
+\label{sec:related-work}
+Some related work
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+
+\section{Methods}
+\label{sec:methods}
+Some methods
+
+\section{Results}
+\label{sec:results}
+Some Results
+
+\section{Discussion}
+\label{sec:discussion}
+Some Discussion
+
+\section{Outlook}
+\label{sec:outlook}
+Some Outlook
+
+\appendix
+
+% \section{Sample Appendix Section} 
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+ \bibliographystyle{elsarticle-num} 
+ \bibliography{cas-refs}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+% \begin{thebibliography}{00}
+
+% %% \bibitem{label}
+% %% Text of bibliographic item
+
+% \bibitem{}
+
+% \end{thebibliography}
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.
