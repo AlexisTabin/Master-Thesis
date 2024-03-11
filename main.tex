@@ -14,28 +14,21 @@
 %% The list of all files belonging to the 'Elsarticle Bundle' is
 %% given in the file `manifest.txt'.
 %% 
-
 %% Template article for Elsevier's document class `elsarticle'
-%% with numbered style bibliographic references
-%% SP 2008/03/01
-%%
-%% 
-%%
-%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
-%%
-%%
+%% with harvard style bibliographic references
+
 \documentclass[5p,times]{elsarticle}
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
 %% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
 %% for a journal layout:
-%% \documentclass[final,1p,times]{elsarticle}
-%% \documentclass[final,1p,times,twocolumn]{elsarticle}
-%% \documentclass[final,3p,times]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn]{elsarticle}
-%% \documentclass[final,5p,times]{elsarticle}
-%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
 
 %% For including figures, graphicx.sty has been loaded in
 %% elsarticle.cls. If you prefer to use the old commands
@@ -61,7 +54,7 @@
 
 %% use the tnoteref command within \title for footnotes;
 %% use the tnotetext command for theassociated footnote;
-%% use the fnref command within \author or \address for footnotes;
+%% use the fnref command within \author or \affiliation for footnotes;
 %% use the fntext command for theassociated footnote;
 %% use the corref command within \author for corresponding author footnotes;
 %% use the cortext command for theassociated footnote;
@@ -75,11 +68,11 @@
 %% \fntext[label2]{}
 %% \cortext[cor1]{}
 %% \affiliation{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
 %% \fntext[label3]{}
 
 \title{Counterfactual Explanations for Time Series Regression}
@@ -99,24 +92,28 @@
 %%             postcode={},
 %%             state={},
 %%             country={}}
+% Julia E. Vogt
+% View ORCID ID profile
+% Department of Computer Science, ETH Zurich, Universitätstrasse 6, 8092, Zürich, Switzerland
 
 \author[inst1]{Alexis Tabin}
+\author[inst1]{Patrick Langer}
+\author[inst2]{Julia E. Vogt}
 
-\affiliation[inst1]{organization={Department of Computer Science},%Department and Organization
-            addressline={ETH Zürich}, 
-            city={Zürich},
+\affiliation[inst1]{organization={Department of Management, Technology, and Economics},%Department and Organization
+            addressline={Weinbergstrasse 56/58}, 
+            city={ETH Zurich},
+            state={Zurich},
             country={Switzerland}}
-
-\author[inst2]{Patrick Langer}
-
-\affiliation[inst2]{organization={Center for Digital Health Interventions},%Department and Organization
-            addressline={Department of Management, Technology, and Economics}, 
+\affiliation[inst2]{organization={Department of Computer Science},%Department and Organization
+            addressline={Universitatstrasse 6}, 
             city={ETH Zurich},
             state={Zurich},
             country={Switzerland}}
 
-\begin{abstract}
 
+
+\begin{abstract}
 % Pyrkov
 % Age-related physiological changes in humans are linearly associated with age. Naturally, linear combinations of physiological measures trained to estimate chronological age have recently emerged as a practical way to quantify aging in the form of biological age. In this work, we used one-week long physical activity records from a 2003–2006 National Health and Nutrition Examination Survey (NHANES) to compare three increasingly accurate biological age models: the unsupervised Principal Components Analysis (PCA) score, a multivariate linear regression, and a state-of-the-art deep convolutional neural network (CNN). We found that the supervised approaches produce better chronological age estimations at the expense of a loss of the association between the aging acceleration and all-cause mortality. Consequently, we turned to the NHANES death register directly and introduced a novel way to train parametric proportional hazards models suitable for out-of-the-box implementation with any modern machine learning software. As a demonstration, we produced a separate deep CNN for mortality risks prediction that outperformed any of the biological age or a simple linear proportional hazards model. Altogether, our findings demonstrate the emerging potential of combined wearable sensors and deep learning technologies for applications involving continuous health risk monitoring and real-time feedback to patients and care providers. \\
 
@@ -168,12 +165,12 @@
 
 \end{abstract}
 
-%%Graphical abstract
+% %%Graphical abstract
 % \begin{graphicalabstract}
 % \includegraphics{grabs}
 % \end{graphicalabstract}
 
-%%Research highlights
+% %%Research highlights
 % \begin{highlights}
 % \item Research highlight 1
 % \item Research highlight 2
@@ -181,8 +178,7 @@
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations
-%% PACS codes here, in the form: \PACS code \sep code
+Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations%% PACS codes here, in the form: \PACS code \sep code
 % \PACS 0000 \sep 1111
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
@@ -219,29 +215,33 @@ Some Discussion
 \section{Outlook}
 \label{sec:outlook}
 Some Outlook
-
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
 \appendix
 
-% \section{Sample Appendix Section} 
+\section{Sample Appendix Section}
+\label{sec:sample:appendix}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor section \ref{sec:sample1} incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 %% If you have bibdatabase file and want bibtex to generate the
 %% bibitems, please use
 %%
- \bibliographystyle{elsarticle-num} 
- \bibliography{cas-refs}
+\bibliographystyle{elsarticle-harv} 
+\bibliography{cas-refs}
 
 %% else use the following coding to input the bibitems directly in the
 %% TeX file.
 
 % \begin{thebibliography}{00}
 
-% %% \bibitem{label}
+% %% \bibitem[Author(year)]{label}
 % %% Text of bibliographic item
 
-% \bibitem{}
+% \bibitem[ ()]{}
 
 % \end{thebibliography}
 \end{document}
+
 \endinput
 %%
-%% End of file `elsarticle-template-num.tex'.
+%% End of file `elsarticle-template-harv.tex'.
