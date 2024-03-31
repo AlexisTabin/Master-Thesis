@@ -75,7 +75,7 @@
 %%            country={}}
 %% \fntext[label3]{}
 
-\title{Counterfactual Explanations for Time Series Regression}
+\title{Towards Explainable Time-Series Extrinsic Regression for Biological Age Estimation}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -151,17 +151,18 @@
 % age, thus enabling personalized interventions and health monitoring strategies. Through the integration of wearable sensors and
 % deep learning techniques, our research contributes to the advancement of continuous health risk monitoring and real-time feedback,
 % paving the way for improved health outcomes and quality of life across diverse populations.
-\begin{itemize}
-    \item Digital biomarkers can be used to monitor health status
-    \item Recent studies have shown that Physical Activity can be used to estimate the Biological Age
-    \item The use of time-series regression to predict biological age requires large deep-learning models.
-    \item Those models are like big black boxes that are hard to understand.
-    \item In healthcare, understanding how DL models are making their decisions is key.
-    \item For this reason, the explainability of DL models is important.
-    \item In this paper, we explain DL models used to predict BA from time-series representing the weekly PA.
-    \item To do so, we used counterfactuals.
+Biological age is a useful predictor of longevity and a patient's current health status. Physical activity can serve as a digital biomarker to predict a patient's biological age. By continuously monitoring a patient's health status, they can receive recommendations to improve their health. Predicting biological age from physical activity requires complex models. We are interested in discovering how a patient can adjust their physical activity to decrease their biological age and improve their health status. This mission is called "Counterfactual Explanations for Time-Series Extrinsic Regression" and has not been extensively explored to our knowledge.
+% \begin{itemize}
+%     \item Digital biomarkers can be used to monitor health status
+%     \item Recent studies have shown that Physical Activity can be used to estimate the Biological Age
+%     \item The use of time-series regression to predict biological age requires large deep-learning models.
+%     \item Those models are like big black boxes that are hard to understand.
+%     \item In healthcare, understanding how DL models are making their decisions is key.
+%     \item For this reason, the explainability of DL models is important.
+%     \item In this paper, we explain DL models used to predict BA from time-series representing the weekly PA.
+%     \item To do so, we used counterfactuals.
     
-\end{itemize}
+% \end{itemize}
 
 \end{abstract}
 
@@ -190,9 +191,33 @@ Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations%% PACS cod
 %% \linenumbers
 
 %% main text
+
 \section{Introduction}
 \label{sec:sample1}
-Some intro
+\textbf{Biological Age} First, speak about biological age; it is different from chronological age in what sense and how it can be used to predict mortality and longevity. 
+
+Inflammation, mortality and biological age (BA) are factors used to measure health and longevity. Biological age offers a great potential to be digitized. Recent work has shown the potential for physicality activity to be a digital biomarker for biological age. BA can be retrieved with the Klemeral and Doubal method from biomarkers present in the NHANES dataset. The same goes for physical activity
+
+\textbf{Physical Activity} From the 2003-2006 National Health and Nutrition Examination Survey (NHANES). Introduce the survey and explain the population that took part.
+
+Smartwatch records an accelerometer value, which is aggregated in a per-minute activity intensity value. Preprocessing steps include moving averages and filtering steps.
+
+\textbf{BA from PA ?} Explain/summarizes of the findings at the C4DHI.
+Circadian Rhythm Analysis Using Wearable-Based Accelerometry as a Digital Biomarker of Aging and Healthspan.
+Comparative Efficacy of Commercial Wearables for Circadian Rhythm Home Monitoring from Activity, Heart Rate, and Core Body Temperature. Wearable-based Physical Activity as a Digital Biomarker of Inflammation, Biological Age, and Mortality: A Hierarchical Clustering Analysis of NHANES 2011 - 2014.
+
+
+\textbf{Deep Learning Approach} How can we use Deep-Learning models to predict the biological age ? Introduce Time-Series Extrinsic Regression. Difference with Forecasting task.
+
+Summarizes the existing approaches :
+Pyrkov’s \& Al. [3] “demonstrate the emerging potential of combined wearable sensors and deep learning technologies for applications involving continuous health risk monitoring and real-time feedback to patients and care providers”. ConvLSTM [4] “This work has signifcant implications in combining wearable sensors and deep learning techniques for improved health monitoring, for instance, in a mobile health environment." TCN, previously implemented at C4DHI, lightweight and intuitive model with similar performance as ConvLSTM
+
+\textbf{Pipeline} Explain what are the different steps of the pipeline. Figure ? Explain current focus, and possible benefits. Convince that this is indeed very useful !!
+
+\textbf{Explainability for Time-Series Extrinsic Regression} Show current state, no other existing techniques open-source available. Explain why Counterfactuals are the chosen technique for our use case. Explain shortly how it works
+
+
+
 
 \section{Related Work}
 \label{sec:related-work}
