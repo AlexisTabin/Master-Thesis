@@ -1,0 +1,55 @@
+% Pyrkov
+% Age-related physiological changes in humans are linearly associated with age. Naturally, linear combinations of physiological measures trained to estimate chronological age have recently emerged as a practical way to quantify aging in the form of biological age. In this work, we used one-week long physical activity records from a 2003–2006 National Health and Nutrition Examination Survey (NHANES) to compare three increasingly accurate biological age models: the unsupervised Principal Components Analysis (PCA) score, a multivariate linear regression, and a state-of-the-art deep convolutional neural network (CNN). We found that the supervised approaches produce better chronological age estimations at the expense of a loss of the association between the aging acceleration and all-cause mortality. Consequently, we turned to the NHANES death register directly and introduced a novel way to train parametric proportional hazards models suitable for out-of-the-box implementation with any modern machine learning software. As a demonstration, we produced a separate deep CNN for mortality risks prediction that outperformed any of the biological age or a simple linear proportional hazards model. Altogether, our findings demonstrate the emerging potential of combined wearable sensors and deep learning technologies for applications involving continuous health risk monitoring and real-time feedback to patients and care providers. \\
+
+% %% Syed Ashiqur Rahman
+% Recent research highlights the need for a correct instrument for monitoring individual health status, especially in the elderly. Different definitions of biological ageing have been proposed, with a consistent positive association of physical activity and physical fitness with decelerated ageing trajectories. The six-minute walking test is considered the current gold standard for estimating the individual fitness status of the elderly.
+
+% Human age estimation is an important and difficult challenge. Different biomarkers and numerous approaches have been studied for biological age estimation, each with its advantages and limitations. In this work, we investigate whether physical activity can be exploited for biological age estimation for adult humans. We introduce an approach based on deep convolutional long short term memory (ConvLSTM) to predict biological age, using human physical activity as recorded by a wearable device.  the NHANES physical activity dataset. This work has significant implications in combining wearable sensors and deep learning techniques for improved health monitoring, for instance, in a mobile health environment. Mobile health (mHealth) applications provide patients, caregivers, and administrators continuous information about a patient, even outside the hospital.
+% \\
+
+% %Jinjoo Shim
+% Repeated disruptions in circadian rhythms are associated with implications for health outcomes and longevity. The utilization of wearable devices in quantifying circadian rhythm to elucidate its connection to longevity, through continuously collected data remains largely unstudied. In this work, we investigate a data-driven segmentation of the 24-h accelerometer activity profiles from wearables as a novel digital biomarker for longevity in 7,297 U.S. adults from the 2011–2014 National Health and Nutrition Examination Survey. Using hierarchical clustering, we identified five clusters and described them as follows: \textit{High activity}, \textit{Low activity}, \textit{Mild circadian rhythm (CR) disruption”}, \textit{Severe CR disruption}, and \textit{Very low activity}.
+% Young adults with extreme CR disturbance are seemingly healthy with few comorbid conditions, but in fact associated with higher white blood cell, neutrophils, and lymphocyte counts  Older adults with CR disruption are significantly associated with increased systemic inflammation indexes , biological aging advance , and all-cause mortality risk. Our findings highlight the importance of circadian alignment on longevity across all ages and suggest that data from wearable accelerometers can help in identifying at-risk populations and personalize treatments for healthier aging. \\
+
+% % Höllig
+% With the increasing predominance of deep learning
+% methods on time series classification, interpretability becomes
+% essential, especially in high-stake scenarios. Although many
+% approaches to interpretability have been explored for images
+% and tabular data, time series data has been mostly neglected. We
+% approach the problem of interpretability by proposing TSEvo,
+% a model-agnostic multiobjective evolutionary approach to time
+% series counterfactuals incorporating a variety of time series
+% transformation mechanisms to cope with different types and
+% structures of time series.
+
+% By ChatGPT
+% Understanding the complex relationship between physical activity and biological aging is crucial for promoting healthy aging
+% and mitigating age-related health risks. In this paper, we explore the use of time series regression analysis to predict biological age
+% from longitudinal physical activity data. Leveraging data from the National Health and Nutrition Examination Survey (NHANES),
+% we compare the performance of three biological age models: a vanilla CNN, an adaptation of a Convolutional Long short-term
+% memory (ConvLSTM) to time series, and a Temporal Convolutional Network (TCN). To address this, we propose a novel approach
+% utilizing counterfactual explanations to enhance the interpretability of the predictive model. By examining how changes in physical
+% activity affect biological age predictions, we provide valuable insights into the causal mechanisms underlying the aging process.
+% Our findings highlight the importance of incorporating interpretability into time series regression models for predicting biological
+% age, thus enabling personalized interventions and health monitoring strategies. Through the integration of wearable sensors and
+% deep learning techniques, our research contributes to the advancement of continuous health risk monitoring and real-time feedback,
+% paving the way for improved health outcomes and quality of life across diverse populations.
+% Biological age is a useful predictor of longevity and a patient's current health status. Physical activity can serve as a digital biomarker to predict a patient's biological age. By continuously monitoring a patient's health status, they can receive recommendations to improve their health. Predicting biological age from physical activity requires complex models. We are interested in discovering how a patient can adjust their physical activity to decrease their biological age and improve their health status. This mission is called "Counterfactual Explanations for Time-Series Extrinsic Regression" and has not been extensively explored to our knowledge.
+% \begin{itemize}
+%     \item Digital biomarkers can be used to monitor health status
+%     \item Recent studies have shown that Physical Activity can be used to estimate the Biological Age
+%     \item The use of time-series regression to predict biological age requires large deep-learning models.
+%     \item Those models are like big black boxes that are hard to understand.
+%     \item In healthcare, understanding how DL models are making their decisions is key.
+%     \item For this reason, the explainability of DL models is important.
+%     \item In this paper, we explain DL models used to predict BA from time-series representing the weekly PA.
+%     \item To do so, we used counterfactuals.
+    
+% \end{itemize}
+
+% By ChatGPT : 
+
+Biological age serves as a vital predictor of longevity and overall health, making it a focal point in predictive medicine. Leveraging advancements in digital health, we investigate the utility of physical activity as a digital biomarker for predicting biological age and delivering tailored health recommendations. However, this endeavor is not without its challenges, as it requires the development of intricate predictive models.
+
+In our study, we delve into uncharted territory to explore how adjustments in physical activity can influence biological age and subsequently improve health outcomes. Through rigorous analysis and innovative methodologies, we aim to provide actionable insights for individuals seeking to optimize their health through lifestyle modifications. This mission represents a pioneering effort in the field, promising to unlock new avenues for personalized healthcare optimization.

@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}
+\urlstyle{same}
+
+%New command to display footnote whose markers will always be hidden
+\let\svthefootnote\thefootnote
+\newcommand\blfootnotetext[1]{%
+  \let\thefootnote\relax\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \let\thefootnote\svthefootnote%
+}
+
+%Overriding the \footnotetext command to hide the marker if its value is `0`
+\let\svfootnotetext\footnotetext
+\renewcommand\footnotetext[2][?]{%
+  \if\relax#1\relax%
+    \ifnum\value{footnote}=0\blfootnotetext{#2}\else\svfootnotetext{#2}\fi%
+  \else%
+    \if?#1\ifnum\value{footnote}=0\blfootnotetext{#2}\else\svfootnotetext{#2}\fi%
+    \else\svfootnotetext[#1]{#2}\fi%
+  \fi
+}
+
+\begin{document}
+specific external facts. This can be seen clearly in Section III.A, where the counterfactuals proposed for a particular classifier involve 'black' people changing their race, while not suggesting that 'white' people's race should be varied.
+
+\section*{GENERATING COUNTERFACTUALS}
+In the following section, we give examples of how meaningful counterfactuals can be easily computed. Many of the standard classifiers of machine learning (including Neural Networks, Support Vector Machines, and Regressors) are trained by finding the optimal set of weights $w$ that minimises an objective over a set of training data.
+
+$$
+\arg \min _{w} \ell\left(f_{w}\left(x_{i}\right), y_{i}\right)+\rho(w)
+$$
+
+Equation 1
+
+Where $y_{i}$ is the label for data point $x_{i}$ and $\rho(\cdot)$ is a regularizer over the weights. We wish to find a counterfactual $x^{\prime}$ as close to the original point $x_{i}$ as possible such that $f_{w}\left(x^{\prime}\right)$ is equal to a new target $y^{\prime}$. We can find $x^{\prime}$ by holding $w$ fixed and minimizing the related objective.
+
+$$
+\arg \min _{x^{\prime}} \max _{\lambda} \lambda\left(f_{w}\left(x^{\prime}\right)-y^{\prime}\right)^{2}+d\left(x_{i}, x^{\prime}\right)
+$$
+
+Equation 2
+
+Where $d(\cdot, \cdot)$ is a distance function that measures how far the counterfactual $x^{\prime}$ and the original data point $x_{i}$ are from one another. In practice, maximisation over $\lambda$ is done by iteratively solving for $x^{\prime}$ and increasing $\lambda$ until a sufficiently close solution is found.
+
+The choice of optimiser for these problems is relatively unimportant. In practice, any optimiser capable of training the classifier under Equation 1 seems to work equally well, and we use $\mathrm{ADAM}^{62}$ for all experiments. As local minima are a concern, we initialise each run with different random values for $x^{\prime}$ and select as our counterfactual the best minimizer of Equation 2. These different minima can be used as a diverse set of multiple counterfactuals.
+\footnotetext{62 Diederik Kingma \& Jimmy Ba, ADAM: A Method for Stochastic Optimization, ARXIV:1412.6980, at 1-4 (2014), \href{https://arxiv.org/pdf/1412.6980.pdf}{https://arxiv.org/pdf/1412.6980.pdf} [\href{https://perma.cc/3RH4-WSXG}{https://perma.cc/3RH4-WSXG}].
+}
+
+
+\end{document}
