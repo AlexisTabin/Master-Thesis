@@ -1,3 +1,43 @@
 \section{Methods}
 \label{sec:methods}
-Some methods
+\textbf{Time-Series Extrinsic Regression}
+\begin{definition}
+Let $x=\left[x_{1}, \ldots, x_{T}\right] \in \mathbb{R}^{N \times T}$ be a uni- or multivariate time series, where $T$ is the number of time steps, and $N$ is the number of features.
+Let $x_{i, t}$ be the input feature $i$ at time $t$.\\
+$Y$ denotes the output, and $f: x \rightarrow Y$ a regression model returning a extrinsic continuous variable. The regression model $f$ is seen as a "black box" - i.e., no access to the inner workings of a model is available. Only the result $Y$ is observable.    
+\end{definition}
+
+\textbf{Counterfactual search} The goal of counterfactual approaches is, given a time series $x$ and a classifier $f$, to provide an explanation via counter-examples, allowing humans to understand why model $f$ predicts $y$ for data point $x$ and not a counterfactual class $y^{c f}$ \cite{wachter_counterfactual_2018}. To allow such understanding, we assume that for each $x$, a counterfactual sample $x^{c f}$ can be computed that is close to $x$ but the difference between their prediction is larger than a certain threshold $|y - y^{c f}| > \epsilon$. The resulting $x^{c f}$ is supposed to be a proximate $\left(\mathbf{R}_{1}\right)$ \cite{mothilal_explaining_2020}, sparse $\left(\mathbf{R}_{\mathbf{2}}\right)$ \cite{mothilal_explaining_2020}, and plausible $\left(\mathbf{R}_{3}\right)$ \cite{laugel_dangers_2019} adaption of $x$. Proximity refers to the distance between the query instance $x$ and the counterfactual instance $x_{c f}$, calculated as a distance measure $d$ between $x$ and $x^{c f}$. Sparsity refers to the number of feature changes between $x$ and $x_{c f}$. A plausible adaption indicates that the resulting $x^{c f}$ is in distribution with the available data $D$. \\
+
+\textbf{Note:} In our specific case, as we want to find a healthier patient, the predicted value for the counterfactual has to be lower than the observation's prediction $y - y^{c f} > \epsilon$
+
+\subsection{Adapting TSEvo for Classification to Extrinsic Regression}
+To achieve this we adapted the TSEvo algorithms so it can find counterfactuals in an extrinsic regression problem.
+The adapted objectives are defined below :
+
+
+\begin{definition}
+Desired Properties of the counterfactual.
+$$
+\begin{aligned}
+& \mathbf{R}_{\mathbf{1}}: \min \left(d\left(x, x^{c f}\right)\right), \text { s.t. } f(x) - f\left(x^{c f}\right) > \epsilon\\
+& \mathbf{R}_{\mathbf{2}}: \min \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| !=0}\right), \text { s.t. } f(x) - f\left(x^{c f}\right) > \epsilon\\
+& \\
+& \mathbf{R}_{\mathbf{3}}: x^{c f} \sim D, \text { s.t. } f(x) - f\left(x^{c f}\right) > \epsilon
+\end{aligned}
+$$ 
+\end{definition}
+
+Combining the desired properties $\mathbf{R}_{1}$ and $\mathbf{R}_{\mathbf{2}}$, with a function for guiding the output distance away from the original classification leads to multi-objective problem $O$. Equation 1 shows the minimization problem. $O_{1}$ is derived from $\mathbf{R}_{1}$ by applying Mean Absolute Error as distance function $d$ \cite{mothilal_explaining_2020}, \cite{wachter_counterfactual_2018}. $O_{2}$ is consistent with $\mathbf{R}_{2}$ and $O_{3}$ denotes the output distance maximizing the output distance on a target class $l$. If no target class is chosen the second highest class probability is designated as the target.
+
+\begin{multline}
+\min O(x):=\left(O_{1}\left(x, x^{c f}\right), O_{2}\left(x, x^{c f}\right), O_{3}\left(x^{c f}\right)\right) \\
+\text { s.t. } f(x) - f\left(x^{c f}\right) > \epsilon \\
+O_{1}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T}\left|x_{i, t}-x_{i, t}^{c f}\right| \\
+O_{2}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| \neq 0} \\
+O_{3}\left(x^{c f}\right)=\left(f(x) - f\left(x^{c f}\right)-\epsilon\right) / \epsilon    \\
+\end{multline}
+
+The multiobjective optimisation follows the same steps as the one described in the TSEvo paper \cite{hollig_tsevo_2022}.
+In summary, a population of $n$ individuals is initialized. For $g$ generation, the evolution algorithms will select the best individuals in the population, perform cross-over with a certain probability and/or mutate them with a certain probability. The individuals are evaluated with respect to their objectives score. 
+To mutate and generate plausible counterfactuals $(R3)$, a reference set $R$ is initialized. This reference set $R$ is necessary for the mutation. The reference set $R = {z \in D : f(x)-\epsilon \geq f(z) \geq f(x)-2*\epsilon}$ is a subset of all known data $D$ with a prediction other than the original class $f(x)$.

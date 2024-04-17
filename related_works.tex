@@ -18,30 +18,38 @@
 % Explain existing techniques
 
 %============ Written by ChatGPT ============
-\subsection{Explainable Artificial Intelligence on Time-Series Data} Existing research on Explainable Artificial Intelligence (XAI) for time-series data predominantly focuses on classification tasks. \\
-Here, the emphasis will be put on post-hoc explainability methods, specifically prioritizing techniques that work across different types of models, known as model-agnostic approaches.
-Post-hoc methods wrap an explainability module around the model to generate explanations, contrasting with ante-hoc methods that integrate explainability within the model's architecture.
-Model-agnostic methods are preferred due to their versatility across various model types. \\
+
+\textbf{Time-Series Extrinsic Regression}
+The task of predicting a continuous variable from a time-series is called  
+\acrfull{tser} and was formalized by Tan et al. \cite{tan_time_2021}. More recently, Guijo et al. \cite{guijo-rubio_unsupervised_2023} extended the dataset archive \cite{tan_monash_2020} of \acrshort{tser} problems and implemented new algorithms from \acrfull{tsc} to \acrshort{tser}. Gay et al. \cite{gay_interpretable_2021} proposed an extension of a Bayesian method to construct and select robust and interpretable features in the context of \acrshort{tser}. 
+Middlehurst et al. \cite{middlehurst_extracting_2023} concatenated random shapelets and intervals from different series representations to significantly outperform single-domain approaches for classification and regression. In the specific field of predicting \acrshort{ba} prediction from \acrshort{pa}, \acrshort{pa} is a univariate time-serie of physical intensity, and the predicted continuous variable is the \acrshort{ba}. 
+Few Deep-Learning approaches have tackle this problem before, Pyrkov et al. \cite{pyrkov_extracting_2018} used a 1-dimensional \acrfull{cnn} and Rahman et al. \cite{rahman_deep_2019} implemented a \acrfull{convlstm} network to improve the predicting performance. \\
+
+\textbf{Explainable Artificial Intelligence for Time-Series}
+The goal of this paper is not necessarily to improve the predictive performance of the model but rather to provide meaningful explanations on how a user should adapt his behaviour, his \acrshort{pa}, to improve his health, his \acrshort{ba}. \\
+
+Existing research on \acrfull{xai},  for time-series data predominantly focuses on classification tasks \cite{theissler_explainable_2022}, and some of them on \acrfull{tsf} or \acrfull{tsir} \cite{rojat_explainable_2021}. As no \acrshort{xai} technique for \acrshort{tser} is mentioned in the literature, it was clear that we would have to create or adapt a new \acrshort{xai} method for our use case. 
+We adapted the survey done by Rojat et al. \cite{rojat_explainable_2021} so we could see which method would answer the best our use case. \\
+
+First, the emphasis is put on post-hoc explainability methods, specifically prioritizing techniques that work across different types of models, known as model-agnostic approaches.
+Post-hoc methods wrap an explainability module around the model to generate explanations, contrasting with ante-hoc methods that integrate explainability within the model's architecture. \\
+Model-agnostic methods are preferred due to their versatility across various model types, and adapting a post-hoc agnostic model to our specific use case would be the most straightforward approach. For the same reason, open-source implementations are privileged. \\
+
 Additionally, explainability scopes vary, encompassing both local and global perspectives.
-Local explanations provide insights into individual behaviours, while global explanations discern broader trends within populations.
-Crucially, the patients themselves are the target audience for explanations, aligning with the overarching goal of personalized healthcare interventions.\\
-Furthermore, the problem type addressed typically falls under the name of time-series extrinsic regression, where the goal is to learn a relationship between a time-serie and a continuous scalar variable \cite{tan_time_2021}.
+Local explanations provide insights into individual behaviours, while global explanations discern broader trends within populations. \\
+
+Crucially, the patients themselves are the target audience for our explanations, aligning with the overarching goal of personalized healthcare interventions.\\
 
 \input{xai_survey}
 
-\subsection{Counterfactual Explanations for Time-Series Classification} Counterfactual explanations offer a compelling approach, differing from Adversarial Perturbations primarily in their emphasis on sparse modifications for human interpretability.
-While Adversarial Perturbations focus on imperceptible changes to input data for image classification tasks, counterfactual methods strive to alter the fewest variables necessary to achieve interpretable solutions. \\
+To recap, the \acrshort{xai} model should be model agnostic, with a local scope; the user or patient should understand the explanation, and the code should be publicly available.
+Looking at the Table \ref{table:xai-survey}, the \acrshort{xai} methods that satisfies theses desideratas are called \acrfull{cfe}.\\
+
+\textbf{Counterfactual explanations} For a classification task, the goal of a counterfactual explanation is to show how a sample could be modified to alter its classification. They offer a compelling approach, differing from Universal Adversarial Perturbations \cite{moosavi_dezfooli_universal_2017} primarily in their emphasis on sparse modifications for human interpretability.
+While Adversarial Perturbations focus on imperceptible changes to input data for image classification tasks, counterfactual methods strive to alter the fewest variables necessary to achieve user interpretable solutions. \\
 
 
-\subsubsection{Wachter} Pioneering work by Wachter et al. \cite{wachter_counterfactual_2018} laid the foundation for counterfactual theory, offering clear definitions and methodologies, including the influential Wachter equation.
-
-%============ From Wachter paper ============
-\begin{equation} \label{eq:1}
-\arg \min _{w} \ell\left(f_{w}\left(x_{i}\right), y_{i}\right)+\rho(w)
-\end{equation}
-
-Where $y_{i}$ is the label for data point $x_{i}$ and $\rho(\cdot)$ is a regularizer over the weights. We wish to find a counterfactual $x^{\prime}$ as close to the original point $x_{i}$ as possible such that $f_{w}\left(x^{\prime}\right)$ is equal to a new target $y^{\prime}$. We can find $x^{\prime}$ by holding $w$ fixed and minimizing the related objective.
-
+Wachter et al. \cite{wachter_counterfactual_2018} introduced counterfactual theory, establishing key definitions and methodologies, notably the Wachter equation. 
 
 \begin{equation} \label{eq:2}
 \arg \min _{x^{\prime}} \max _{\lambda} \lambda\left(f_{w}\left(x^{\prime}\right)-y^{\prime}\right)^{2}+d\left(x_{i}, x^{\prime}\right)
@@ -49,43 +57,11 @@ Where $y_{i}$ is the label for data point $x_{i}$ and $\rho(\cdot)$ is a regular
 
 Where $d(\cdot, \cdot)$ is a distance function that measures how far the counterfactual $x^{\prime}$ and the original data point $x_{i}$ are from one another. In practice, maximisation over $\lambda$ is done by iteratively solving for $x^{\prime}$ and increasing $\lambda$ until a sufficiently close solution is found.
 
-The choice of optimiser for these problems is relatively unimportant. In practice, any optimiser capable of training the classifier under Equation 1 seems to work equally well, and we use $\mathrm{ADAM}$ \cite{kingma_adam_2017} for all experiments.
-As local minima are a concern, we initialise each run with different random values for $x^{\prime}$ and select as our counterfactual the best minimizer of Equation 2. These different minima can be used as a diverse set of multiple counterfactuals.
-%============ From Wachter paper ============
-\subsubsection{Instance-Based}
-\input{instance-based/instance-based}
 
-%============ From TSEvo paper ============
-\subsubsection{TSEvo}
-We study a supervised time series classification problem. Let $x=\left[x_{1}, \ldots, x_{T}\right] \in \mathbb{R}^{N \times T}$ be a uni- or multivariate time series, where $T$ is the number of time steps and $N$ is the number of features. Let $x_{i, t}$ be the input feature $i$ at time $t$. Similarly, let $X_{:, t} \in R^{N}$ and $X_{i,:} \in R^{T}$ be the feature vector at time $t$, and the time vector for feature $i$, respectively. $Y$ denotes the output, and $f: x \rightarrow Y$ a classification model returning a probability distribution vector over classes $Y=\left[y_{1}, \ldots, y_{C}\right]$, where $C$ is the total number of classes (i.e., outputs) and $y_{i}$ the probability of $x$ belonging to class $i$. The classification model $f$ is seen as a "black-box" - i.e., no access to the inner workings of a model are available. Only the result $Y$ is observable.
+Native Guide \cite{delaney_instance-based_2021} relies upon existing instances in the training data, so-called native guides or nearest unlike neighbors (NUNs), that it retrieves and adapts to generate counterfactual explanations. 
 
-\begin{definition}
-Goal Properties of the TSEvo counterfactual search.
-$$
-\begin{aligned}
-& \mathbf{R}_{\mathbf{1}}: \min \left(d\left(x, x^{c f}\right)\right), \text { s.t. } f(x) \neq f\left(x^{c f}\right) \\
-& \mathbf{R}_{\mathbf{2}}: \min \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| !=0}\right), \text { s.t. } f(x) \neq f\left(x^{c f}\right) \\
-& \\
-& \mathbf{R}_{\mathbf{3}}: x^{c f} \sim D, \text { s.t. } f(x) \neq f\left(x^{c f}\right)
-\end{aligned}
-$$ 
-\end{definition}
-The goal of counterfactual approaches is, given a time series $x$ and a classifier $f$, to provide an explanation via counter examples allowing humans to understand why classifier $f$ chose class $y$ for data point $x$ and not a counterfactual class $y^{c f}$ \cite{wachter_counterfactual_2018}. To allow such understanding, we assume that for each $x$, a counterfactual sample $x^{c f}$ can be computed, that is close to $x$, but differently classified $y \neq y^{c f}$. The resulting $x^{c f}$ is supposed to be a proximate $\left(\mathbf{R}_{1}\right)$ \cite{mothilal_explaining_2020}, sparse $\left(\mathbf{R}_{\mathbf{2}}\right)$ \cite{mothilal_explaining_2020}, and plausible $\left(\mathbf{R}_{3}\right)$ \cite{laugel_dangers_2019} adaption of $x$. Proximity refers to the distance between the query instance $x$ and the counterfactual instance $x_{c f}$, calculated as a distance measure $d$ between $x$ and $x^{c f}$. Sparsity refers to the number of feature changes between $x$ and $x_{c f}$. A plausible adaption indicates that the resulting $x^{c f}$ is in distribution with the available data $D$.
 
-Combining the desired properties $\mathbf{R}_{1}$ and $\mathbf{R}_{\mathbf{2}}$, with a function for guiding the output distance away from the original classification leads to multi-objective problem $O$. Equation 1 shows the minimization problem. $O_{1}$ is derived from $\mathbf{R}_{1}$ by applying Mean Absolute Error as distance function $d$ \cite{mothilal_explaining_2020}, \cite{wachter_counterfactual_2018}. $O_{2}$ is consistent with $\mathbf{R}_{2}$ and $O_{3}$ denotes the output distance maximizing the output distance on a target class $l$. If no target class is chosen the second highest class probability is designated as the target.
+ TSEvo \cite{hollig_tsevo_2022} uses an Evolutionary algorithm to resolve a multi-objective problem and find the best counterfactuals. \\
 
-\begin{multline}
-\min O(x):=\left(O_{1}\left(x, x^{c f}\right), O_{2}\left(x, x^{c f}\right), O_{3}\left(x^{c f}\right)\right) \\
-\text { s.t.f }(x) \neq f\left(x^{c f}\right) \\
-O_{1}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T}\left|x_{i, t}-x_{i, t}^{c f}\right| \\
-O_{2}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| \neq 0} \\
-O_{3}\left(x^{c f}\right)=1-f\left(x^{c f}\right)_{l}    \\
-\end{multline}
-
-TODO : Explain how TSEvo then find the best CF
-
-%============ From TSEvo paper ============
-
-\subsection{Gap - From Counterfactuals for Time-Series Classification to Counterfactuals for Time-Series Extrinsic Regression} Despite advancements in counterfactual explanations for time-series classification, there exists a notable gap in extending these techniques to address extrinsic regression tasks within time-series data analysis. Bridging this gap is essential for enabling the interpretation of AI-derived insights in the context of individual health trajectories, thereby facilitating actionable recommendations tailored to individual needs.
+\textbf{From Counterfactuals for Time-Series Classification to Counterfactuals for Time-Series Extrinsic Regression} Despite advancements in counterfactual explanations for time-series classification, there exists a notable gap in extending these techniques to address extrinsic regression tasks within time-series data analysis. For other modalities, like tabular data or images, Letzgus et al. \cite{letzgus_toward_2022} provided precious insights toward \acrfull{xair}. But for time-series, bridging this gap is essential for enabling the interpretation of AI-derived insights in the context of individual health trajectories. It would facilitate actionable recommendations tailored to individual needs and has, to our knowledge, never been attempted before.
 %============ Written by ChatGPT ============
-

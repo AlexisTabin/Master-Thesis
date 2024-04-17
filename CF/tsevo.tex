@@ -1,0 +1,29 @@
+%============ From TSEvo paper ============
+We study a supervised time series classification problem. Let $x=\left[x_{1}, \ldots, x_{T}\right] \in \mathbb{R}^{N \times T}$ be a uni- or multivariate time series, where $T$ is the number of time steps and $N$ is the number of features. Let $x_{i, t}$ be the input feature $i$ at time $t$. Similarly, let $X_{:, t} \in R^{N}$ and $X_{i,:} \in R^{T}$ be the feature vector at time $t$, and the time vector for feature $i$, respectively. $Y$ denotes the output, and $f: x \rightarrow Y$ a classification model returning a probability distribution vector over classes $Y=\left[y_{1}, \ldots, y_{C}\right]$, where $C$ is the total number of classes (i.e., outputs) and $y_{i}$ the probability of $x$ belonging to class $i$. The classification model $f$ is seen as a "black-box" - i.e., no access to the inner workings of a model are available. Only the result $Y$ is observable.
+
+\begin{definition}
+Goal Properties of the TSEvo counterfactual search.
+$$
+\begin{aligned}
+& \mathbf{R}_{\mathbf{1}}: \min \left(d\left(x, x^{c f}\right)\right), \text { s.t. } f(x) \neq f\left(x^{c f}\right) \\
+& \mathbf{R}_{\mathbf{2}}: \min \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| !=0}\right), \text { s.t. } f(x) \neq f\left(x^{c f}\right) \\
+& \\
+& \mathbf{R}_{\mathbf{3}}: x^{c f} \sim D, \text { s.t. } f(x) \neq f\left(x^{c f}\right)
+\end{aligned}
+$$ 
+\end{definition}
+The goal of counterfactual approaches is, given a time series $x$ and a classifier $f$, to provide an explanation via counter examples allowing humans to understand why classifier $f$ chose class $y$ for data point $x$ and not a counterfactual class $y^{c f}$ \cite{wachter_counterfactual_2018}. To allow such understanding, we assume that for each $x$, a counterfactual sample $x^{c f}$ can be computed, that is close to $x$, but differently classified $y \neq y^{c f}$. The resulting $x^{c f}$ is supposed to be a proximate $\left(\mathbf{R}_{1}\right)$ \cite{mothilal_explaining_2020}, sparse $\left(\mathbf{R}_{\mathbf{2}}\right)$ \cite{mothilal_explaining_2020}, and plausible $\left(\mathbf{R}_{3}\right)$ \cite{laugel_dangers_2019} adaption of $x$. Proximity refers to the distance between the query instance $x$ and the counterfactual instance $x_{c f}$, calculated as a distance measure $d$ between $x$ and $x^{c f}$. Sparsity refers to the number of feature changes between $x$ and $x_{c f}$. A plausible adaption indicates that the resulting $x^{c f}$ is in distribution with the available data $D$.
+
+Combining the desired properties $\mathbf{R}_{1}$ and $\mathbf{R}_{\mathbf{2}}$, with a function for guiding the output distance away from the original classification leads to multi-objective problem $O$. Equation 1 shows the minimization problem. $O_{1}$ is derived from $\mathbf{R}_{1}$ by applying Mean Absolute Error as distance function $d$ \cite{mothilal_explaining_2020}, \cite{wachter_counterfactual_2018}. $O_{2}$ is consistent with $\mathbf{R}_{2}$ and $O_{3}$ denotes the output distance maximizing the output distance on a target class $l$. If no target class is chosen the second highest class probability is designated as the target.
+
+\begin{multline}
+\min O(x):=\left(O_{1}\left(x, x^{c f}\right), O_{2}\left(x, x^{c f}\right), O_{3}\left(x^{c f}\right)\right) \\
+\text { s.t.f }(x) \neq f\left(x^{c f}\right) \\
+O_{1}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T}\left|x_{i, t}-x_{i, t}^{c f}\right| \\
+O_{2}\left(x, x^{c f}\right)=\frac{1}{N * T} \sum_{i=1}^{N} \sum_{t=1}^{T} \mathbbm{1}_{\left|x_{i, t}-x_{i, t}^{c f}\right| \neq 0} \\
+O_{3}\left(x^{c f}\right)=1-f\left(x^{c f}\right)_{l}    \\
+\end{multline}
+
+TODO : Explain how TSEvo then find the best CF
+
+%============ From TSEvo paper ============

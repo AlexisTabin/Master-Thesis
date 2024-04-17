@@ -39,7 +39,7 @@ Like other case-based XAI methods $25,27,31,41$, at its core Native Guide relies
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.4\textwidth]{instance-based/images/instance-based.jpg}
+    \includegraphics[width=0.4\textwidth]{CF/images/instance-based.jpg}
     \caption{A query time series $T_{q}$ (X with solid arrow) and a nearest-unlike neighbor, $T_{N U N}^{\prime}$ (red circle with solid arrow) are used to guide the generation of counterfactual $T^{\prime}$ (see yellow circle) in a binary classification task. Another in-sample counterfactual (i.e., the next NUN; other red circle with dashed arrow) could also be used to generate another counterfactual for diverse explanations.}
 \end{figure}
 
@@ -54,12 +54,11 @@ Accordingly, using the feature-weights, the method seeks to modify contiguous, s
 
 $$
 \begin{aligned}
-& T_{q}=\left\{<t_{1}, t_{2}, t_{3}, t_{4}, t_{5} \ldots, t n>\right\} \text { s.t. } b\left(T_{q}\right)=c \\
-& T^{\prime}=\left\{<t_{1}, t_{2}^{\prime}, t_{3}^{\prime}, t_{4}^{\prime}, t_{5} \ldots, t n>\right\} \text { s.t. } b\left(T^{\prime}\right)=c^{\prime}
+& T_{q}=\left\{<t_{1}, t_{2}, t_{3}, t_{4}, t_{5} \ldots, t_{n}>\right\} \text { s.t. } b\left(T_{q}\right)=c \\
+& T^{\prime}=\left\{<t_{1}, t_{2}^{\prime}, t_{3}^{\prime}, t_{4}^{\prime}, t_{5} \ldots, t_{n}>\right\} \text { s.t. } b\left(T^{\prime}\right)=c^{\prime}
 \end{aligned}
 $$
 
-Specifically, the feature-weight vector, $\boldsymbol{\omega}$, can be extracted using techniques such as Class Activation Mapping in the case of DNNs (see e.g. Figure 2). Given $T_{N a t i v e}^{\prime}$ and $\boldsymbol{\omega}$, the most influential contiguous subsequence (measured by the magnitude of weights in $\boldsymbol{\omega}$ ) is identified and the corresponding region in $T_{q}$ is replaced with these values. This process can be initialized using a small subsequence and the length of this subsequence can be iteratively incremented until $b\left(T^{\prime}\right)=c^{\prime}$. In the very worst case scenario, the size of the subsequence will be equal to the length of $T_{q}$ and the native counterfactual $T_{\text {Native }}^{\prime}$ is returned. This adaptation step improves the proximity and plausibility of the generated counterfactuals. Finally, diversity can also be met, as other in-sample instances can be used as guides (e.g., the next nearest unlike neighbor), to produce alternative counterfactual explanations for the original query (see Figure 3).
 
 
 \footnotetext{\href{https://github.com/e-delaney/Instance-Based_CFE_TSC}{https://github.com/e-delaney/Instance-Based\_CFE\_TSC}

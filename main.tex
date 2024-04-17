@@ -44,11 +44,30 @@
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
 
-\usepackage{pdflscape}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{booktabs,chemformula}
 \usepackage{bbm}
 \usepackage{algpseudocode}
+
+
+\usepackage{hyperref}
+\usepackage[acronym]{glossaries}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=bluegray,
+  citecolor=black,
+  urlcolor=black,
+  linktoc=all,
+}
+
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
+
+\usepackage{makecell}
+
+
+\makeglossaries
+\loadglsentries{glossary}
 
 
 % \theoremstyle{definition}
@@ -142,7 +161,7 @@
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations%% PACS codes here, in the form: \PACS code \sep code
+Deep Learning \sep Time Series \sep Extrinsic Regression \sep Counterfactuals \sep Explanations%% PACS codes here, in the form: \PACS code \sep code
 % \PACS 0000 \sep 1111
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
@@ -189,7 +208,9 @@ Deep Learning \sep Time Series \sep Counterfactuals \sep Explanations%% PACS cod
 % %% Text of bibliographic item
 
 % \bibitem[ ()]{}
+\clearpage
 
+\printglossaries
 % \end{thebibliography}
 \end{document}
 
