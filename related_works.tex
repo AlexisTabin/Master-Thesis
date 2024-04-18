@@ -31,14 +31,13 @@ The goal of this paper is not necessarily to improve the predictive performance 
 Existing research on \acrfull{xai},  for time-series data predominantly focuses on classification tasks \cite{theissler_explainable_2022}, and some of them on \acrfull{tsf} or \acrfull{tsir} \cite{rojat_explainable_2021}. As no \acrshort{xai} technique for \acrshort{tser} is mentioned in the literature, it was clear that we would have to create or adapt a new \acrshort{xai} method for our use case. 
 We adapted the survey done by Rojat et al. \cite{rojat_explainable_2021} so we could see which method would answer the best our use case. \\
 
+To determine the most suitable method, we carefully evaluated specific criterias.
 First, the emphasis is put on post-hoc explainability methods, specifically prioritizing techniques that work across different types of models, known as model-agnostic approaches.
-Post-hoc methods wrap an explainability module around the model to generate explanations, contrasting with ante-hoc methods that integrate explainability within the model's architecture. \\
+Post-hoc methods wrap an explainability module around the model to generate explanations, contrasting with ante-hoc methods that integrate explainability within the model's architecture.
 Model-agnostic methods are preferred due to their versatility across various model types, and adapting a post-hoc agnostic model to our specific use case would be the most straightforward approach. For the same reason, open-source implementations are privileged. \\
 
 Additionally, explainability scopes vary, encompassing both local and global perspectives.
-Local explanations provide insights into individual behaviours, while global explanations discern broader trends within populations. \\
-
-Crucially, the patients themselves are the target audience for our explanations, aligning with the overarching goal of personalized healthcare interventions.\\
+Local explanations provide insights into individual behaviours, while global explanations discern broader trends within populations. Crucially, the patients themselves are the target audience for our explanations, aligning with the overarching goal of personalized healthcare interventions. Due to this reason, local scope explanations are prioritized over general ones. \\
 
 \input{xai_survey}
 
@@ -55,13 +54,14 @@ Wachter et al. \cite{wachter_counterfactual_2018} introduced counterfactual theo
 \arg \min _{x^{\prime}} \max _{\lambda} \lambda\left(f_{w}\left(x^{\prime}\right)-y^{\prime}\right)^{2}+d\left(x_{i}, x^{\prime}\right)
 \end{equation}
 
-Where $d(\cdot, \cdot)$ is a distance function that measures how far the counterfactual $x^{\prime}$ and the original data point $x_{i}$ are from one another. In practice, maximisation over $\lambda$ is done by iteratively solving for $x^{\prime}$ and increasing $\lambda$ until a sufficiently close solution is found.
+Where $d(\cdot, \cdot)$ is a distance function that measures how far the counterfactual $x^{\prime}$ and the original data point $x_{i}$ are from one another. Wachter et Al. \cite{wachter_counterfactual_2018} suggest to use the Manhattan distance weighted feature-wise with the inverse \acrfull{mad} to generate sparse and outlier-robust solutions.
+In practice, maximisation over $\lambda$ is done by iteratively solving for $x^{\prime}$ and increasing $\lambda$ until a sufficiently close solution is found. The issue with Wachter's method is that there is no constraint on the plausibility of the obtained counterfactual and that it is not trivial to find an optimal $\lambda$. \\
+
+To resolve the plausibility issue, Native Guide \cite{delaney_instance-based_2021}, like some \acrshort{cfe}s for other data modalities \cite{keane_good_2020, kenny_twin-systems_2019, hollig_tsevo_2022, nugent_gaining_2009, leake_introduction_2005}, lean on existing instances in the training data to generate in-distribution counterfactual explanations. Native Guide works in two steps. First, it retrieves the \acrfull{nun} from the dataset. The \acrshort{nun} are the closest instances in the dataset that are classified differently than the original data point.
+Then, using the weights of the last layer of the classification model, the algorithm "guides"  one of the \acrshort{nun} towards the decision boundary of the model.\\
 
 
-Native Guide \cite{delaney_instance-based_2021} relies upon existing instances in the training data, so-called native guides or nearest unlike neighbors (NUNs), that it retrieves and adapts to generate counterfactual explanations. 
+ More recently, TSEvo \cite{hollig_tsevo_2022}, an evolutionary counterfactual approach, uses various properties of time series transformations to create realistic counterfactuals for both uni- and multivariate classification problems. This approach utilizes integrated time series transformers, which enable the generation of different types of counterfactuals. Höllig et al. \cite{hollig_tsevo_2022} also found that TSEvo outperforms other time series counterfactual approaches in both uni- and multivariate time series.\\
 
-
- TSEvo \cite{hollig_tsevo_2022} uses an Evolutionary algorithm to resolve a multi-objective problem and find the best counterfactuals. \\
-
-\textbf{From Counterfactuals for Time-Series Classification to Counterfactuals for Time-Series Extrinsic Regression} Despite advancements in counterfactual explanations for time-series classification, there exists a notable gap in extending these techniques to address extrinsic regression tasks within time-series data analysis. For other modalities, like tabular data or images, Letzgus et al. \cite{letzgus_toward_2022} provided precious insights toward \acrfull{xair}. But for time-series, bridging this gap is essential for enabling the interpretation of AI-derived insights in the context of individual health trajectories. It would facilitate actionable recommendations tailored to individual needs and has, to our knowledge, never been attempted before.
+\textbf{Towards Counterfactual Explanations for Time-Series Extrinsic Regression} Despite advancements in counterfactual explanations for time-series classification, there exists a notable gap in extending these techniques to address extrinsic regression tasks within time-series data analysis. For other modalities, like tabular data or images, Letzgus et al. \cite{letzgus_toward_2022} provided precious insights toward \acrfull{xair}. But for time-series, bridging this gap is essential for enabling the interpretation of AI-derived insights in the context of individual health trajectories. It would facilitate actionable recommendations tailored to individual needs and has, to our knowledge, never been attempted before.
 %============ Written by ChatGPT ============
