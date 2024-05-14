@@ -1,59 +1,58 @@
-\begin{table*}[H]
+    
+\begin{table*}[p]
   \centering
-  \begin{tabular}{@{}cccccccccc@{}}
+  \begin{tabular}{@{}lllllllllll@{}}
     \toprule
     Year        &   Ref                         & Model             & Methods       & \makecell{ Model - \\ Specific / \\ Agnostic}   & Scope         & Target  & \makecell{ Problem \\ Type }                       & Citations         & Code \\
     \midrule
+    \midrule
 
-    2013        & \cite{senin_sax-vsm_2013}             &\textit{Sax-vsm}   & SAX           & S      & G        & D      & C                    & 379               & \href{https://github.com/jMotif/sax-vsm_classic}{code}\\ 
+    % \vspace{5pt}
+    2024        & \textbf{Ours}           & \textit{TSEvoR}& \textbf{Counterfactual}           & \textbf{A}             & \textbf{L}             & \textbf{U}         & \textbf{ER}                   & -                 & \textbf{\href{https://github.com/AlexisTabin/BA-Estimation-TCN}{code}}  \\ \hline
     
     2016        &   \cite{wang_time_2016}        & \textit{FCN}      & Backpropagation     & S      & L         & D      & C                    & 1688              & \href{https://github.com/cauchyturing/UCR_Time_Series_Classification_Deep_Learning_Baseline}{code}\\ 
 
-    2017        & \cite{karim_multivariate_2019}             &\textit{\footnotesize{LSTM-FCN}} & Attention     &S       & L         & D      & C                    & 1143              & \href{https://github.com/houshd/LSTM-FCN}{code}\\ 
+    2019        & \cite{strodthoff_detecting_2019}  &\textit{\footnotesize{MI-FCNN}}   & Backpropagation     &S       & L         & U   & C                    & 176               & no\\ 
 
-    2018        & \cite{wachter_counterfactual_2018} & \textit{W-CF} & Counterfactual    & A      & L         & U      & C & 2584 & \href{https://github.com/e-delaney/Instance-Based_CFE_TSC/tree/main/W-CF}{code}\\
-
-    2018        & \cite{vinayavekhin_focusing_2018} &\textit{TCL}& Attention &S        & L         & D      & C,F                           & 25                & no\\  
-
-    2018        & \cite{strodthoff_detecting_2019}  &\textit{\footnotesize{MI-FCNN}}   & Backpropagation     &S       & L         & U   & C                    & 176               & no\\ 
-
-    2018        & \cite{siddiqui_tsviz_2019}       &\textit{Tsviz}     & Backpropagation     &S       & B          & D      & C,F                    & 78                & \href{https://github.com/shoaibahmed/TSViz-Core}{code}\\
-
-    2018        & \cite{nguyen_interpretable_2018}&\textit{SEQL}&SAX        &S       & G        & D      & C                    & 11                & \href{https://github.com/lnthach/Mr-SEQL}{code}\\ 
-
-    2018        & \cite{cho_interpretation_2020}   &\textit{CHAP}      & Backpropagation     & S      & B          & D      & C                           & 176               & no\\
-
-    2018        & \cite{ge_interpretable_2018}      &\textit{\footnotesize{ICU-LSTM}}  & Attention     &S       & G        & D      & F                        & 68                & no \\  
-
-    2018        & \cite{el-sappagh_ontology-based_2018}   & \textit{FAHP}     & Fuzy logic    &S       & G        & U      & C                    & 78                & no\\ 
+    2019        & \cite{siddiqui_tsviz_2019}       &\textit{Tsviz}     & Backpropagation     &S       & B          & D      & C,F                    & 78                & \href{https://github.com/shoaibahmed/TSViz-Core}{code}\\
 
     2019        &   \cite{ismail_fawaz_accurate_2019}  & \textit{\footnotesize{ESS-CNN}}  & Backpropagation     &S       & L         & U   & C,F                    & 86                & \href{https://github.com/hfawaz/ijcars19}{code}\\ 
 
-    2019        &  \cite{wang_learning_2019}      &\textit{PR-CNN} & Sapelets      &S       & G        & D      & C                    & 17                & no\\ 
-
     2019        &   \cite{oviedo_fast_2019}    & \textit{AutoXRD}  & Backpropagation     &S       & B          & D      & C                    & 198               & \href{https://github.com/PV-Lab/autoXRD/tree/master}{code}\\ 
-
-    2019        & \cite{kashiparekh_convtimenet_2019}&\textit{ConvNet}& Perturbation  &A       & L         & D      & C                    & 89                & no \\ 
-
-    2019        & \cite{choi_fully_2021}               &\textit{IDH}& Attention   &S       & L         & D      & C                                 & 92                & \href{https://github.com/yoonchoi-neuro/automated_hybrid_IDH}{code}\\  
-
-    2019        & \cite{tonekaboni_explaining_2019}&\textit{FFC}& Counterfactual&A    & B          & D      & C                           & 8                & no \\ 
 
     2019        & \cite{assaf_mtex-cnn_2019}                  &\textit{Mtex-cnn}  & Backpropagation&S       & L         & D      & F                        & 51                & no\\ 
 
-    2019        & \cite{munir_tsxplain_2019}            &\textit{Tsxplain}  &  Backpropagation    &A       & L         & D      & C                    & 17                & no\\  
+    % 2019        & \cite{munir_tsxplain_2019}            &\textit{Tsxplain}  &  Backpropagation    &A       & L         & D      & C                    & 17                & no\\  
 
-    2019        & \cite{gee_explaining_2019}        &\textit{PDL}       & Prototypes    &S       & G        & D      & C                    & 66                & \href{https://github.com/alangee/ijcai19-ts-prototypes}{code} \\ 
-
-    2020        & \cite{li_efficient_2022}                   &\textit{\footnotesize{BSPCOVER}}  & Shapelets     & S      & G        & D      & C                    & 43               & no\\  
-
-    % 2020        & \cite{augustin_adversarial_2020}&\textit{RATIO} & Counterfactual&A      & L         & D      & Training                          & 70                & \href{https://github.com/M4xim4l/InNOutRobustness}{code}\\ 
-    
-    2020        & \cite{hao_new_2020}                 &\textit{CA-SFCN}   & Attention     &S       & L         & D      & C                    & 30                & \href{https://github.com/huipingcao/nmsu_yhao_ijcai2020}{code}\\ 
+    2020        & \cite{cho_interpretation_2020}   &\textit{CHAP}      & Backpropagation     & S      & B          & D      & C                           & 176               & no\\
 
     2020        &   \cite{wolanin_estimating_2020}       & \textit{CY-EDL}   & Backpropagation     &S       & B          & U   & F                          & 125               & no \\
 
-    2020        & \cite{kidger_generalised_2020}& \textit{GST}      & Shapelets     &S       & G        & D      & C                    & 9                 & \href{https://github.com/patrick-kidger/generalised_shapelets}{code}\\  
+    2020        & \cite{lauritsen_early_2020}   &\textit{TCN}       &Backpropagation      &S       & B          & D      & C                    & 234               &no\\ 
+    % \href{https://github.com/albermax/innvestigate}{1} and \href{https://github.com/slundberg/shap}{2} \\
+    
+    2019        & \cite{kashiparekh_convtimenet_2019}&\textit{ConvNet}& Perturbation  &A       & L         & D      & C                    & 89                & no \\ 
+    2019        & \cite{guilleme_agnostic_2019} &\textit{LEFTIST} & Perturbation    & A        & L         & D      & C                     & 52                & \href{https://www.dropbox.com/s/y1xq5bhpf0irg2h/code_LEFTIST.zip?e=2}{code} \\
+    
+    2020        & \cite{pan_series_2020}           &\textit{Saliency}& Perturbation    &A       & L         & D      & F                       & 7                 & no \\ 
+
+    2020        & \cite{ismail_benchmarking_2020}           &\textit{Saliency}& Perturbation    &A       & L         & D      & C                    & 124               & \href{https://github.com/ayaabdelsalam91/TS-Interpretability-Benchmark}{code}\\ 
+
+    2021        &\cite{crabbe_explaining_2021}    & \textit{DynaMask}     & Perturbation  & A      & L     & D      & A                    & 55            & \href{https://github.com/JonathanCrabbe/Dynamask}{code}   \\ 
+
+    2023        &\cite{zhao_explainable_2023}                &\textit{Att-TCN}   & Perturbation             & A             & B             & D          & C                    & 3                 & no \\ 
+
+    2023    & \cite{mujkanovic_timexplain_2023} & \textit{timeXplain}            & Perturbation             & A             & L             & D & C & 25 &\href{https://github.com/LoadingByte/timeXplain}{code}\\
+    
+        % 2020        & \cite{augustin_adversarial_2020}&\textit{RATIO} & Counterfactual&A      & L         & D      & Training                          & 70                & \href{https://github.com/M4xim4l/InNOutRobustness}{code}\\ 
+
+    2018        & \cite{vinayavekhin_focusing_2018} &\textit{TCL}& Attention &S        & L         & D      & C,F                           & 25                & no\\  
+
+    2018        & \cite{ge_interpretable_2018}      &\textit{\footnotesize{ICU-LSTM}}  & Attention     &S       & G        & D      & F                        & 68                & no \\  
+
+    2019        & \cite{karim_multivariate_2019}             &\textit{\footnotesize{LSTM-FCN}} & Attention     &S       & L         & D      & C                    & 1143              & \href{https://github.com/houshd/LSTM-FCN}{code}\\ 
+    
+    2020        & \cite{hao_new_2020}                 &\textit{CA-SFCN}   & Attention     &S       & L         & D      & C                    & 30                & \href{https://github.com/huipingcao/nmsu_yhao_ijcai2020}{code}\\ 
 
     2020        & \cite{schockaert_attention_2020} & \textit{\footnotesize{AM-LSTM}}& Attention&S       & B          & D      & F                       & 6                 & no\\ 
 
@@ -61,33 +60,47 @@
 
     2020        & \cite{tan_explainable_2021}                 &\textit{\footnotesize{eUA-CRNN}}  & Attention     &S       & L         & D      & C                                & 28                & no\\  
 
-    2020        & \cite{pan_series_2020}           &\textit{Saliency}& Perturbation    &A       & L         & D      & F                       & 7                 & no \\ 
-
-    2020        & \cite{ismail_benchmarking_2020}           &\textit{Saliency}& Perturbation    &A       & L         & D      & C                    & 124               & \href{https://github.com/ayaabdelsalam91/TS-Interpretability-Benchmark}{code}\\ 
-
-    2020        & \cite{wang_deep_2021}           & \textit{\footnotesize{Deep-FCM}}& Fuzzy logic    &S       & G        & D      & F                        & 39                & no\\ 
-
-    2020        & \cite{lauritsen_early_2020}   &\textit{TCN}       &Backpropagation      &S       & B          & D      & C                    & 234               & \href{https://github.com/albermax/innvestigate}{1} and \href{https://github.com/slundberg/shap}{2} \\
-
-    2021        &\cite{crabbe_explaining_2021}    & \textit{DynaMask}     & Perturbation  & A      & L     & D      & A                    & 55            & \href{https://github.com/JonathanCrabbe/Dynamask}{code}   \\ 
-
-    2021        & \cite{lim_temporal_2020}         & \textit{TFT}      & Attention     &S       & B          & D      & F                       & 822               & \href{https://github.com/greatwhiz/tft_tf2}{code}       \\ 
-
-    2021    & \cite{ates_counterfactual_2021}   & COMTE                & Counterfactual    & A & L & B & C & 77 & \href{https://github.com/peaclab/CoMTE}{code} \\
-
-    2021        & \cite{delaney_instance-based_2021} & \textit{\footnotesize{Native Guide}} & Counterfactual & A & L & B      & C & 92 & \href{https://github.com/e-delaney/Instance-Based_CFE_TSC/tree/main}{code} \\
+    2020        & \cite{lim_temporal_2020}         & \textit{TFT}      & Attention     &S       & B          & D      & F                       & 822               & \href{https://github.com/greatwhiz/tft_tf2}{code}       \\ 
+    
+    2021        & \cite{choi_fully_2021}               &\textit{IDH}& Attention   &S       & L         & D      & C                                 & 92                & \href{https://github.com/yoonchoi-neuro/automated_hybrid_IDH}{code}\\  
   
     2022        &\cite{gao_explainable_2022}       &  \textit{ETNODE}  & Attention     &S       & B          & D      & F                        & 8                 & \href{https://github.com/PengleiGao/ETN-ODE}{code} \\  
 
-    2023        &\cite{zhao_explainable_2023}                &\textit{Att-TCN}   & Perturbation             & A             & B             & D          & C                    & 3                 & no \\ 
+    2013        & \cite{senin_sax-vsm_2013}             &\textit{Sax-vsm}   & SAX           & S      & G        & D      & C                    & 379               & \href{https://github.com/jMotif/sax-vsm_classic}{code}\\ 
 
-    2023        & \cite{hollig_tsevo_2022}           & \textit{TSEvo}& Counterfactual           & A             & L             & U         & C                                 & 5                 & \href{https://github.com/fzi-forschungszentrum-informatik/TSInterpret}{code} \\
-    \hline\hline
+    2018        & \cite{nguyen_interpretable_2018}&\textit{SEQL}&SAX        &S       & G        & D      & C                    & 11                & \href{https://github.com/lnthach/Mr-SEQL}{code}\\ 
+    
+    2018        & \cite{el-sappagh_ontology-based_2018}   & \textit{FAHP}     & Fuzzy logic    &S       & G        & U      & C                    & 78                & no\\ 
 
-    2024        & Ours           & \textit{TSEvoR}& Counterfactual           & A             & L             & U         & ER                   & -                 & \href{https://github.com/AlexisTabin/BA-Estimation-TCN}{code} \\
+    2021        & \cite{wang_deep_2021}           & \textit{\footnotesize{Deep-FCM}}& Fuzzy logic    &S       & G        & D      & F                        & 39                & no\\ 
+
+    2019        &  \cite{wang_learning_2019}      &\textit{PR-CNN} & Shapelets      &S       & G        & D      & C                    & 17                & no\\ 
+
+    2020        & \cite{kidger_generalised_2020}& \textit{GST}      & Shapelets     &S       & G        & D      & C                    & 9                 & \href{https://github.com/patrick-kidger/generalised_shapelets}{code}\\  
+
+    2022        & \cite{li_efficient_2022}                   &\textit{\footnotesize{BSPCOVER}}  & Shapelets     & S      & G        & D      & C                    & 43               & no\\  
+
+    2019        & \cite{gee_explaining_2019}        &\textit{PDL}       & Prototypes    &S       & G        & D      & C                    & 66                & \href{https://github.com/alangee/ijcai19-ts-prototypes}{code} \\ 
+
+    2023        & \cite{li_prototypes_2023}          &\textit{ProtoAD}   & Prototypes     &S       & G        & D      & C                    & -                 & no \\
+
+    2018        & \cite{wachter_counterfactual_2018} & \textit{W-CF} & Counterfactual    & A      & L         & U      & C & 2584 & \href{https://github.com/e-delaney/Instance-Based_CFE_TSC/tree/main/W-CF}{code}\\
+
+    2019        & \cite{tonekaboni_explaining_2019}&\textit{FFC}& Counterfactual&A    & B          & D      & C                           & 8                & no \\ 
+
+    2021    & \cite{ates_counterfactual_2021}   & COMTE                & Counterfactual    & A & L & B & C & 77 & \href{https://github.com/peaclab/CoMTE}{code} \\
+    
+    2021        & \cite{delaney_instance-based_2021} & \textit{\footnotesize{Native Guide}} & Counterfactual & A & L & B      & C & 92 & \href{https://github.com/e-delaney/Instance-Based_CFE_TSC/tree/main}{code} \\
+
+
+    2022        & \cite{hollig_tsevo_2022}           & \textit{TSEvo}& Counterfactual           & A             & L             & U         & C                                 & 5                 & \href{https://github.com/fzi-forschungszentrum-informatik/TSInterpret}{code} \\
+    2023 & \cite{wang_counterfactual_2023} & \textit{ForecastCF}& Counterfactual & A & L & U & F & 1 & \href{https://github.com/zhendong3wang/counterfactual-explanations-for-forecasting?tab=readme-ov-file}{code}\\
+
 
     \bottomrule
   \end{tabular}
-  \label{table:xai-survey}
+
   \caption{Comparison of the existing XAI techniques for Time-Series, adapted from \cite{rojat_explainable_2021}. Table legend: Model-Agnostic/Specific: A-Agnostic, S-Specific, Scope : G-Global, L-Local, B-Both, Target: D-Developer, U-User, B-Both, Problem Type: C-Classification, F-Forecasting, ER-Extrinsic Regression}
+    \label{table:xai-survey}
 \end{table*}
+

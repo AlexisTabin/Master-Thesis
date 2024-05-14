@@ -1,27 +1,41 @@
 \section{Introduction}
 \label{sec:introduction}
 
-% \textbf{Health related aspects}
-% Healthcare costs are exploding
-% Monitoring health variables on a regular basis can help prevent chronic diseases rather than just reacting to them after they have developed.
+Healthcare costs are globally increasing due to an aging population, technological advancements, medication errors, and a rise in annual spending on medicines  \cite{fries_james_f_reducing_1993, bodenheimer_high_2005}. The aging population, poor diet, physical inactivity, and tobacco use (including secondhand smoke) \cite{cdc_chronic_2022} contribute to the prevalence of chronic diseases, which are a major cause of deaths among the populations \cite{huzooree_pervasive_2019}. Digital health \cite{varshney_mobile_2014} can fulfill the need for healthcare accessible to everyone, regardless of location or time, while also improving the quality of care and reducing costs. The use of portable edge devices with sensing capabilities allows for the remote monitoring of patient health data, which can be particularly helpful for those with chronic conditions \cite{javaid_sensors_2021}. With wearable sensors, mobile phones, or other edge devices, patients can easily record physiological and behavioral data, which can be aggregated to create digital biomarkers that explain, influence, or predict health-related outcomes. Passively measured data such as vital signs, physical activity, and other health-related data allows patients to monitor their health condition without visiting a healthcare provider~\cite{coravos_developing_2019}. These real-time and remote monitoring capabilities not only improve patient outcomes but can also reduce healthcare costs by minimizing the need for frequent visits with clinicians.
 
-% \textbf{Deep Learning can infer Biological Age from Physical Activity}
-% AI can be used to monitor health simply through PA
-% But AI cannot tell how to change.
+Processing huge amounts of sequence data typically requires versatile, high-performing, and highly generalizing \gls{dl} models.
+ However, most existing studies have concentrated on tertiary prevention~\cite{barata_bitemporal_2024}, which aims to prevent disease recurrence or complications. Tertiary prevention only deals with diseases that have already occurred and does not proactively reduce the burden on healthcare systems. Therefore, it is crucial to shift the focus towards the early detection of diseases (secondary prevention) or even preventing diseases from occurring in the first place (primary prevention)~\cite{vlachopoulos_role_2015}.
+Both primary and secondary prevention can be very beneficial in preventing the onset of serious health concerns. Research in this field has been limited due to uncertainty about which factors to examine. In general, it is difficult to evaluate the overall health condition of a healthy individual in the absence of disease symptoms.
+% We do not yet have a method to assess the general health state of a healthy individual.
+One potential method to determine the general health state of a person is by using the concept of biological age. Prior work has shown that it is possible to use deep learning models to predict a person's biological age non-invasively using physical activity data~\cite{pyrkov_extracting_2018, rahman_deep_2019}.
+Nevertheless, existing methods of predicting biological age lack an explanation about what a person can do to improve their health state in general. It is widely known that general recommendations such as taking a minimum number of steps each day~\cite{tudor-locke_how_2011}, maintaining good sleeping habits~\cite{shim_wearable-based_2023}, and engaging in recreational activities~\cite{saxena_mental_2005} have a significant impact on health outcomes. However, specific recommendations tailored to the individual's needs are currently lacking, making it difficult to identify what changes to make at a personal level. In order to provide these recommendations, the individual needs to understand how the model assesses their health status.
 
-% \textbf{Goal of the paper}
-% Explain what the patient should do to improve his health. 
-% Show that there is a gap in the research and that it is very much needed in healthcare.
+Despite achieving great performance, \gls{ai} models are limited due to being seen as a black box, resulting in low practical use, especially in healthcare. \gls{xai} helps developers, domain experts, and users understand how \gls{dl} models work and how they make predictions \cite{loh_application_2022}. Many state-of-the-art tools for explaining \gls{dl} models rely on visually highlighting important input data areas, which is useful for developers or domain experts but hard for patients to understand. Counterfactual explanation systems \cite{byrne_counterfactuals_2019} aim to support counterfactual reasoning by modifying the input data to lead to a different prediction by the model. That way, the users of counterfactual explanation systems are provided with a fully diverse type of illustrative information that complies with the \gls{gdpr}\cite{wachter_counterfactual_2018} and are easy for humans to understand \cite{miller_explanation_2019}. There is a tremendous potential for counterfactual explanations in the mobile health setting \cite{lee_clinical_2024}. 
 
+Yet, many of the \gls{xai} techniques predominantly deal with images or texts; time series data has attracted less interest, and the few techniques developed for time series are focused on tasks such as classification or forecasting \cite{theissler_explainable_2022}.     Especially in medical contexts, where relevant information often consists of time-dependent information, high-quality time series counterfactuals have the potential to give meaningful insights into decision processes.
 
-%============ Written by ChatGPT ============
-In contemporary healthcare landscapes, the challenge of escalating healthcare costs looms large. Amidst this backdrop, the imperative of shifting from reactive to proactive healthcare strategies gains prominence. One promising avenue is the utilization of deep learning methodologies to glean insights from an individual's \acrfull{pa} data, thereby inferring crucial health indicators such as biological age. However, while the potential of \acrfull{ai} in health monitoring is vast, a critical gap persists: the translation of \acrshort{ai}-derived insights into actionable steps for individuals to improve their health.\\
+With our work, we make the following contributions:
+\begin{itemize}
+    \item We present a novel approach for generating counterfactual explanations for time series extrinsic regression.
+    \item We use our approach to adjust four counterfactual methods for time series classification to time series extrinsic regression.
+    \item We compare qualitatively and quantitatively generated counterfactual explanations in a mobile health setting to estimate biological age from physical activity data.
+    \item We illustrate how counterfactual explanations can be used to generate meaningful text recommendations and provide continuous health supervision, thus reducing the need for external supervision and, consequently, healthcare costs.
+\end{itemize}
 
-\textbf{Health Related Aspects} Healthcare costs continue to spiral upward, underscoring the urgency of preventative healthcare measures. Monitoring health variables regularly presents a proactive approach to mitigating the onset of chronic diseases, contrasting with the traditional reactive model of healthcare intervention. Moreover, the burden of chronic diseases on both individuals and healthcare systems necessitates a paradigm shift towards proactive measures aimed at early detection and prevention.\\
+\begin{table}[h!t]
+\caption{Code Availability}
+\label{tab:introduction:code_and_website}
+\centering
+\renewcommand*{\arraystretch}{1.4}
+\begin{tabularx}{\columnwidth}{l|X}
+\hline
+\textbf{Implementation} & Python, R\\
+\textbf{License} & MIT \\
+% \textbf{Documentation} & \url{https://www.claid.ethz.ch}\\
+% \textbf{Available packages} & pip, pub, aar (maven)\\
+\textbf{Code repository} & \url{https://github.com/RealLast/BA-Estimation-TCN}\\
+\hline
+\end{tabularx}
+\end{table}
 
-\textbf{Deep Learning Can Infer Biological Age from Physical Activity} The advent of deep learning algorithms has facilitated the extraction of nuanced health information from \acrshort{pa} data alone. Yet, while \acrshort{ai} can proficiently analyze and infer biological age, it currently falls short in providing personalized guidance on how individuals can effectuate tangible changes in their lifestyle to enhance their health outcomes.\\
-
-\textbf{Goal of the Paper} This paper endeavours to bridge this crucial gap by elucidating actionable steps individuals can undertake to ameliorate their health trajectory based on insights derived from \acrshort{ai}-driven analysis of their physical activity data. By demonstrating the dearth of research addressing this vital translation step, we underscore the pressing need for such interventions within the healthcare domain.
-
-In the ensuing sections, we delve into the methodologies employed for inferring biological age from physical activity data and subsequently propose a framework for translating these insights into personalized health recommendations. Through this exploration, we aim to underscore the transformative potential of integrating \acrshort{ai}-driven health monitoring with actionable guidance, thereby revolutionizing preventative healthcare practices.
 %============ Written by ChatGPT ============

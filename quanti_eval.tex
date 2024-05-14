@@ -1,0 +1,92 @@
+\begin{table*}[h!]
+    \large
+    \caption{Objectives}
+    \centering
+    \resizebox{0.96\textwidth}{!}{
+        \small
+        \begin{tabular}{@{ }l@{\hspace{4mm}}l@{\hspace{7mm}}c@{\hspace{10mm}}l@{\hspace{10mm}}l@{\hspace{10mm}}l@{\hspace{10mm}}c@{\hspace{10mm}}}
+                \toprule[1pt]%    
+                && \textbf{Validity}$\,{}^\uparrow$& \textbf{Proximity}$\,{}^\downarrow$& \textbf{Sparsity}$\,{}^\downarrow$& \textbf{Plausibility}$\,{}^\uparrow$& \textbf{Time}$\,{}^\downarrow$
+                    \\
+                    \midrule%
+                \multirow{4}{*}{\textbf{\rotatebox{90}{CNN$\,\;$}}}\n& \textbf{TSEvoR}& 0.37±0.48& 159.99±274.71& \textbf{0.04±0.09}& 0.39±0.25& 8m01s±02m52s\\& \textbf{NUNR}& \textbf{0.99±0.08}& 4740.66±1149.04& 0.98±0.02& \textbf{0.47±0.20}& \textbf{0m01s±00m01s}\\& \textbf{DBAR}& 0.10±0.31& 2499.74±702.91& 0.99±0.03& 0.02±0.11& 9m28s±04m58s\\& \textbf{\gls{wachter}}& 0.00±0.00& \textbf{0.00±0.00}& 1.00±0.00& 0.00±0.00& 1m01s±00m28s\\\n\bottomrule[1pt]\multirow{4}{*}{\textbf{\rotatebox{90}{ConvLSTM$\,\;$}}}\n& \textbf{TSEvoR}& 0.08±0.27& 450.75±445.8& \textbf{0.07±0.10}& 0.46±0.29& 47m36s±11m21s\\& \textbf{NUNR}&\textbf{0.99±0.08}& 3944.03±796.31& 0.98±0.02& \textbf{0.59±0.25}& \textbf{00m01s±00m01s}\\& \textbf{DBAR}& 0.09±0.29& 1898.02±328.64& 1.00±0.02& 0.04±0.15& 11m33s±04m32s\\& \textbf{\gls{wachter}}& 0.02±0.12& \textbf{0.00±0.00}& 0.99±0.02& 0.14±0.27& 06m32s±01m48s\\\n\bottomrule[1pt]\multirow{4}{*}{\textbf{\rotatebox{90}{TCN$\,\;$}}}\n& \textbf{TSEvoR}& 0.39±0.49& 147.37±242.41& \textbf{0.04±0.09}& 0.41±0.26& 10m01s±01m14s\\& \textbf{NUNR}& \textbf{0.99±0.08}& 4740.66±1149.04& 0.98±0.02& \textbf{0.51±0.23}& \textbf{00m01s±00m01s}\\& \textbf{DBAR}& 0.10±0.30& 2344.37±639.02& 1.00±0.02& 0.01±0.07& 12m03s±05m54s\\& \textbf{\gls{wachter}}& 0.00±0.00& \textbf{0.00±0.00}& 1.00±0.00& 0.00±0.00& 01m09s±00m03s\\
+            \bottomrule[1pt]
+            \end{tabular}
+    }
+    \label{tab:experiments:results}
+    \vspace{-5mm}
+\end{table*}
+
+
+
+% \begin{table*}[!t]
+
+%                 \caption{Objectives}
+
+%                 \centering
+
+%                 \resizebox{0.96\textwidth}{!}{%
+
+
+%                 \begin{tabular}{@{ }l@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{}}
+
+%                 \toprule[1pt]%
+
+%                 && \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Validity}$\,{}^\uparrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Proximity}$\,{}^\downarrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Sparsity}$\,{}^\downarrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Plausibility}$\,{}^\uparrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Time}$\,{}^\downarrow$}\\ 
+% [1mm]
+% && \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}\\ 
+% \midrule%
+% \multirow{4}{*}{\textbf{\rotatebox{90}{Techniques$\,\;$}}}
+% & TSEvoR 	& 0.37 	& 0.08 	& 0.39 	& 159.99 	& 450.75 	& \textbf{147.37} 	& \textbf{0.04} 	& 0.07 	& \textbf{0.04} 	& 0.39 	& 0.46 	& 0.41 	& 08m 01s 	& 47m 36s 	& 10m 01s \\
+% & NUNR 	& \textbf{0.99} 	& \textbf{0.99} 	& \textbf{0.99} 	& 4740.66 	& 3944.03 	& 4740.66 	& 0.98 	& 0.98 	& 0.98 	& 0.47 	& \textbf{0.59} 	& 0.51 	& \textbf{00m 00s} 	& \textbf{00m 00s} 	& \textbf{00m 00s} \\
+% & DBAR 	& 0.1 	& 0.09 	& 0.1 	& 2499.74 	& 1898.02 	& 2344.37 	& 0.99 	& 1.0 	& 1.0 	& 0.02 	& 0.04 	& 0.01 	& 12m 28s 	& 11m 33s 	& 12m 03s \\
+% & \gls{wachter} 	& 0.0 	& 0.0 	& 0.0 	& - 	& - 	& - 	& 1.0 	& 1.0 	& 1.0 	& 0.0 	& 0.0 	& 0.0 	& 01m 01s 	& 07m 13s 	& 01m 19s \\
+
+%                 \bottomrule[1pt]
+
+%                 \end{tabular}
+
+%                 }
+
+%                 \label{tab:experiments:results}
+
+%                 \vspace{-5mm}
+
+%                 \end{table*}
+
+
+% \begin{table*}[!t]
+
+%     \caption{Objectives}
+
+%                 \centering
+
+%                 \resizebox{0.96\textwidth}{!}{%
+
+
+%                 \begin{tabular}{@{ }l@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{\hspace{7mm}}c@{\hspace{1.5mm}}c@{\hspace{1mm}}c@{}}
+
+%                 \toprule[1pt]%
+
+%                 && \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Validity}$\,{}^\uparrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Proximity}$\,{}^\downarrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Sparsity}$\,{}^\downarrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Plausibility}$\,{}^\uparrow$}& \multicolumn{3}{c@{\hspace{10mm}}}{\textbf{Time}$\,{}^\downarrow$}\\ 
+% [1mm]
+% && \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}& \textbf{CNN}& \textbf{ConvLSTM}& \textbf{TCN}\\ 
+% \midrule%
+% \multirow{4}{*}{\textbf{\rotatebox{90}{Techniques$\,\;$}}}
+% & TSEvoR 	& 0.37±0.48 	& 0.08±0.27 	& 0.39±0.49 	& 159.99±274.71 	& 450.75±445.8 	& 147.37±242.41 	& 0.04±0.09 	& 0.07±0.1 	& 0.04±0.09 	& 0.39±0.25 	& 0.46±0.29 	& 0.41±0.26 	& 08m 01s±02m 52s 	& 47m 36s±11m 21s 	& 10m 01s±01m 14s \\
+% & NUNR 	& 0.99±0.08 	& 0.99±0.08 	& 0.99±0.08 	& 4740.66±1149.04 	& 3944.03±796.31 	& 4740.66±1149.04 	& 0.98±0.02 	& 0.98±0.02 	& 0.98±0.02 	& 0.47±0.2 	& 0.59±0.25 	& 0.51±0.23 	& 00m 00s±00m 00s 	& 00m 00s±00m 00s 	& 00m 00s±00m 00s \\
+% & DBAR 	& 0.1±0.31 	& 0.09±0.29 	& 0.1±0.3 	& 2499.74±702.91 	& 1898.02±328.64 	& 2344.37±639.02 	& 0.99±0.03 	& 1.0±0.02 	& 1.0±0.02 	& 0.02±0.11 	& 0.04±0.15 	& 0.01±0.07 	& 12m 28s±04m 58s 	& 11m 33s±04m 32s 	& 12m 03s±04m 54s \\
+% & \gls{wachter} 	& 0.0±0.0 	& 0.0±0.0 	& 0.0±0.0 	& -±- 	& -±- 	& -±- 	& 1.0±0.0 	& 1.0±0.0 	& 1.0±0.0 	& 0.0±0.0 	& 0.0±0.0 	& 0.0±0.0 	& 01m 01s±00m 27s 	& 07m 13s±00m 42s 	& 01m 19s±00m 03s \\
+
+%                 \bottomrule[1pt]
+
+%                 \end{tabular}
+
+%                 }
+
+%                 \label{tab:experiments:results}
+
+%                 \vspace{-5mm}
+
+% \end{table*}
+

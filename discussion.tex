@@ -1,7 +1,54 @@
 \section{Discussion}
 \label{sec:discussion}
-\textbf{Setting thresholds for regression models is brittle ?}\\
-Spooner \& Al. \cite{spooner_counterfactual_2021} argue that the choice of the threshold has an influence on the found counterfactual.
 
-From the paper itself : TODO
-\input{CF/potential}
+
+Our work aims to introduce novel methods for explainable time series extrinsic regression for \gls{xai} applications. Our interest was primarily focused on model-agnostic user-targeted explanations. To achieve this, we have adapted four counterfactual techniques from the domain of time series classification. We outline principal findings, practical implications, limitations below and also provide a comparison with prior work.
+
+
+
+\subsection{Principal findings}
+% Summary: A brief recap of your key results
+% aim for a clear statement of the overall result that directly answers your main research question. This should be no more than one paragraph.
+% More specifically, we strongly believe that shifting the paradigm of reactive healthcare to preventive healthcare is essential to break the rising costs of health, and this can be done effectively by combining the recent boom of wearable sensors and novel AI solutions. 
+The plots~(see~Fig.~\ref{fig:quali-eval}) illustrate how the evolution of techniques from left to right affects the quality of generated counterfactuals. \gls{wachter} technique utilizes noise to produce a counterfactual, but it mostly fails due to an excessive emphasis on the proximity metric. \gls{nunr}, which finds an existing counterfactual instance, is advantageous because it is highly plausible since it is based on someone else's activity. However, it suggests a lot of different changes and lacks sparsity. \gls{dbar} is an improvement on \gls{nunr}, using an average between the query and NUN to improve the proximity metric, but at the cost of validity and plausibility, without addressing the sparsity issue. \gls{tsevor} uses powerful time series transformers to mutate subsequences of existing instances, resulting in sparse, proximate, plausible, and valid counterfactuals. 
+Looking at the numbers, the fact that \gls{nunr} has only around $50\%$ of plausibility indicates the counterfactual, which is an instance of the dataset in the \gls{nunr} case, has a label close to only half its neighbors. This indicates a noisy model that predicts differently close instances. When using a \gls{tcn} or a \gls{cnn}, \gls{tsevor} manages to find a valid counterfactual in $40\%$ of the cases. This percentage drops when \gls{tsevor} is used with the \gls{convlstm} because of its use of a complex data representation. 
+We can see that \gls{tsevor} is the only technique that manages to find proximate, sparse, and highly plausible counterfactuals.
+The \gls{tsevor}-generated counterfactual explanations are easy to understand at a glance, delivering high-quality feedback to users.
+
+\subsection{Comparison with prior work} 
+ Previous research has tackled similar tasks in the field. Perturbation techniques such as DynaMask \cite{crabbe_explaining_2021} can be used to highlight essential subsets of time series data. While it is useful for exp
+ laining \gls{tser}, it does not focus on the user. Counterfactual techniques have been developed for \gls{tsc} \cite{hollig_tsevo_2022, delaney_instance-based_2021} and \gls{tsf} \cite{wang_counterfactual_2023} tasks. However, these techniques require some modifications to explain \gls{tser} tasks. As far as we know, no explainable technique specifically targeting users for \gls{tser} models exists.
+
+\subsection{Practical implications}
+Our algorithms can be used to explain any univariate \gls{tser} task, we did not test it on multivariate data. For biological age estimation, our work brings the final piece of the puzzle for continuous health assessments using wearable devices. Using Counterfactual explanation, a smartphone app provides meaningful feedback on how the patient should modify his physical activity to improve his health. Our research on biological age estimation is not limited to that particular area, as our approach can be applied to any \gls{dl} technique that aims to learn a score from time series data. For instance, it can be used to understand how the mortality rate of people affected by contagious disease would change depending on the variation of the number of contagions, as indicated in Diaz-Lozano et al.'s study on COVID-19 \cite{diaz-lozano_covid-19_2022}. Similarly, our approach can demonstrate the impact of the hourly total number of parked cars on the daily occupancy rate, as shown in Stolfi et al.'s study \cite{stolfi_predicting_2017}. If a task related to \gls{tser} is being performed and a \gls{dl} model is showing good results, we can use our new \gls{tsevor} approach to identify counterfactuals. The capacity of \gls{tsevor} to find valid counterfactuals (as defined in Definition \ref{def:validity}) is dependent on the reference set's size (as defined in Section \ref{def:ref-set}). The number of mutations that \gls{tsevor} can attempt is determined by the size of the reference set, and if the reference set is empty, it will not be able to identify any counterfactuals. The plausibility of the counterfactuals may vary depending on the accuracy of the \gls{dl} model (as explained in Section \ref{def:plausibility}). Currently, our best methods have achieved 60\% plausibility, indicating that there is still room for improvement.
+% Our work bring  brings the final piece of the puzzle for continuous health assessments using wearable devices.
+% \begin{enumerate}
+%     \item The patient continuously collects physical activity using a wearable device, such as a smartwatch.
+%     \item A trained deep-learning model predicts biological age, an indicator of the patient's current health status.
+% \end{enumerate}
+% Interpretations: What do your results mean?
+% Implications: Why do your results matter?
+% \subsection{Comparison with prior work}
+% No available before.
+
+\subsection{Limitations}
+In order to improve our approach, it's important to acknowledge some limitations that are inherent in our implementation and methodology. First, the computation times for \gls{tsevor} are quite long, which suggests that we could benefit from using parallelization strategies to speed up the process. Second, our reliance on specific models like \gls{tcn}, \gls{cnn}, and \gls{convlstm} can lead to variable results, which raises questions about the fairness of comparisons and the need for more robust models \cite{hamman_robust_2024} with lower \gls{mae}. Third, the selection of thresholds is somewhat arbitrary and can have unexplored implications for the outcomes \cite{spooner_counterfactual_2021}. In addition, our algorithms have primarily been tested on univariate time-series data, which could limit their applicability to more complex datasets. Finally, the effectiveness of \gls{tsevor} depends heavily on the availability of a valid reference set, which means it may not be effective in scenarios where such data is lacking. Therefore, it's important to explore alternative strategies in those cases. By addressing these limitations, we can develop a more comprehensive and reliable framework for generating counterfactuals.
+% Limitations: What can’t your results tell us?
+% Here, just mention one paragraph about general limitations of our implementation and approach. The following things come to mind spontaneously:
+% \begin{enumerate}
+%     \item Computation times -> \gls{tsevo} is slow -> could be improved by parallelization
+%     \item Our results highly depend on the model (\gls{tcn}, \gls{cnn}, \gls{convlstm}) and their performance (is it fair to compare a 14.85 MAE \gls{tcn} with a 17.35 MAE \gls{tcn}?) -> In the future there might be models with a lower MAE and hence should be used to generate more robust counterfactuals; there are also metrics to measure robustness of counterfactuals across different models: https://arxiv.org/abs/2305.11997
+%     \item The choice of the threshold is somewhat arbitrary, we did not study its effects.
+%     \item Algorithms were only tested on univariate time-series
+%     \item \gls{tsevor} highly depends on the reference set~(cf.~Def.~\ref{def:ref-set}), which means that if there is no valid \gls{nun} in the dataset, the method will not be able to produce any counterfactual. 
+% \end{enumerate}
+
+%\subsubsection{\gls{wachter}}
+%One advantage of \gls{wachter} is that it does not require access to any other sample in the dataset to generate a counterfactual explanation, which is not the case for \gls{nunr}, \gls{dbar} and \gls{tsevor}, which need a reference set~(cf.~Def.~\ref{def:ref-set}). As this method only constraints counterfactuals on their validity \ref{def:validity} and proximity \ref{def:proximity}, it fails to produce sparse \ref{def:sparsity} counterfactuals. Another point is that choosing the right value for lambda is difficult; we were not able to find a suitable parameter that would produce consistently proximate \textit{and} valid counterfactuals.
+
+%\subsection{Native Guide}
+%To mutate the \gls{nun} towards the decision boundary, we first aimed to adapt the Native Guide methods \cite{delaney_instance-based_2021}. Native Guide guides the \gls{nun} by using the last layer of the classification model. With the help of GradCAM \cite{selvaraju_grad-cam_2020}, it finds the discriminative part of the query and modifies it using the found \gls{nun} to find a proximate counterfactual. The adaptation of GradCAM for the regression case was not further investigated and remains open for future research.
+
+%\subsubsection{Setting thresholds for regression models is brittle ?}
+%Spooner \& Al. \cite{spooner_counterfactual_2021} argue that the choice of the threshold has an influence on the found counterfactual. The authors discuss using thresholds to specify the validity of counterfactuals (CFs) for scalar regression problems, as we did in this work. They claim that it can result in unrealistic CFs far from the query point when the distance in x exceeds the threshold value. Their article proposes a potential-based search approach, assigning a scalar potential to each output y, quantifying the value associated with candidate counterfactual points. This approach formalizes the notion of regression counterfactuals in terms of potentials instead of thresholds, which can lead to more accurate results. We believe that we resolved the unrealistic issue by providing an outer limit for the counterfactual label; it would be interesting to compare the potential approach, but we decided not to because of the code's unavailability.
+
