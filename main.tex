@@ -50,6 +50,7 @@
 \usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{optidef}
+\usepackage{tablefootnote}
 
 \usepackage{hyperref}
 \usepackage[acronym]{glossaries}
@@ -83,12 +84,12 @@
 % \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
-% \journal{Nature}
+\journal{ETH Zurich}
 
 \begin{document}
 
 \newcommand{\valid}[2]{f(#1) - \varepsilon \geq f(#2) \geq f(#1) - 2\varepsilon}
-\includepdf[pages=-]{Declaration_of_originality.pdf}
+% \includepdf[pages=-]{Declaration_of_originality.pdf}
 % \includepdf[pages={1}]{myfile.pdf
 \begin{frontmatter}
 
@@ -147,15 +148,13 @@ Towards Explainable Deep Learning Extrinsic Regression for Biological Age Estima
 \author[inst2]{Julia E. Vogt}
 \author[inst1]{Filipe Barata}
 
-\affiliation[inst1]{organization={ETH Zurich},
-            addressline={ Centre for Digital Health Interventions}, 
-            city={Zurich},
-            state={},
-            country={Switzerland}}
 \affiliation[inst2]{organization={ETH Zurich},%Department and Organization
             addressline={Department of Computer Science}, 
             city={Zurich},
-            state={},
+            country={Switzerland}}
+\affiliation[inst1]{organization={ETH Zurich},
+            addressline={ Centre for Digital Health Interventions}, 
+            city={Zurich},
             country={Switzerland}}
 \begin{abstract}
 \input{abstract}
@@ -201,6 +200,7 @@ Deep Learning \sep Time Series \sep Extrinsic Regression \sep Counterfactuals \s
 \input{discussion}
 
 \input{outlook}
+\input{acknowledgments}
 % \input{appendix}
 
 %% If you have bibdatabase file and want bibtex to generate the

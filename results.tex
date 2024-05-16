@@ -1,52 +1,55 @@
 \section{Results}
 \label{sec:results}
-In the results section, we first report the performance of the \gls{dl} to estimate Biological Age data~(cf.~Section~\ref{sec:results:dl-training}). Then, we evaluate the generated \gls{cfe} using qualitative and quantitative criteria~(cf.~Section~\ref{sec:results:cf}).
+\input{quali_eval}
 
-\subsection{Biological Age Estimation with \gls{dl}}
+In the results section, we first report the performance of the \gls{dl} models to estimate Biological Age data~(cf.~Section~\ref{sec:results:dl-training}). Then, we evaluate the generated \gls{cfe} using qualitative and quantitative criteria~(cf.~Section~\ref{sec:results:cf}).
+
+\subsection{Biological Age Estimation with Deep Learning}
 \label{sec:results:dl-training}
-We set out to reproduce results presented in prior work \cite{pyrkov_extracting_2018, rahman_deep_2019} and achieved the following results~(cf.~Table~\ref{tab:models}).
+We set out to reproduce results presented in prior work \cite{pyrkov_extracting_2018, rahman_deep_2019} that use \gls{dl} models to estimate biological age from physical activity data and achieved the following results~(cf.~Table~\ref{tab:models}).
+In Rahman et al. work \cite{rahman_deep_2019}, the authors reported slightly different results. For the \gls{convlstm}, they reported a \gls{mae} of $13.21$ years, an \gls{mse} of $282,58$ with a Pearson correlation of $0.62$. For the \gls{cnn}, they reported an \gls{mae} of $15.49$, an \gls{mse} of $353.82$, and a Pearson correlation of $0.45$.
 \begin{table}[h!]
     \centering
     \begin{tabular}{cccc}
         \toprule
-        \textbf{Model} & \textbf{\gls{mse}} & \textbf{\gls{mae}} & \makecell{\textbf{Pearson} \\\textbf{Correlation}}\\
+        \textbf{Model} & \textbf{\gls{mse}$\,{}^\downarrow$} & \textbf{\gls{mae}$\,{}^\downarrow$} & \makecell{\textbf{Pearson} \\\textbf{Correlation}$\,{}^\uparrow$}\\
         \midrule
-        \textbf{TCN} & 367.69 & 14.85 & 0.49\\
-        \textbf{CNN} & 501.33 & 17.35 & 0.22\\
-        \textbf{ConvLSTM} & 488.25 & 17.50 & 0.23\\
+        \textbf{\gls{tcn}} & 367.69 & 14.85 & 0.49\\
+        \textbf{\gls{cnn}} & 501.33 & 17.50 & 0.23\\
+        \textbf{\gls{convlstm}} & 488.25 & 17.35 & 0.22\\
         \bottomrule
     \end{tabular}
-    \caption{Comparison of the models' performance}
+    \caption{Comparison of the models' performances}
     \label{tab:models}
 \end{table}
+
 \subsection{Counterfactuals for Biological Age Estimation}
 \label{sec:results:cf}
 In this section, we evaluate the generated counterfactuals in two ways. First, qualitatively, we plotted one patient evaluated with the four different counterfactual techniques. The plots allow us to evaluate the user interpretability of the explanations. Looking at the explanations, a user should understand what he does well, what he could improve, and what impact it will have on his health. Then, we evaluate quantitatively using metrics based on the properties defined in Section \ref{sec:methods}. 
 
 \subsubsection{Qualitative evaluation}
-\input{quali_eval}
- Fig. \ref{fig:quali-eval} shows counterfactuals obtained for a specific patient using the four counterfactual methods.
+ Fig. \ref{fig:quali-eval} shows counterfactuals obtained for a specific patient using the four counterfactual methods. We highlight findings for each method in the following subsections.
 
 \subsubsection{\gls{wachter}}
-Figure~\ref{fig:cf:wachter} shows the counterfactual result for patient 6306. It was obtained using the TCN model and the \gls{wachter} technique. The model's predicted biological labels are located at the top left of the plot. According to the TCN model, the patient's biological age is 46.46.
+Figure~\ref{fig:cf:wachter} shows the counterfactual result for patient 6306. It was obtained using the \gls{tcn} model and the \gls{wachter} technique. The model's predicted biological labels are at the plot's top. According to the \gls{tcn} model, the patient's biological age is 46.46.
 % \textbf{Contrastiveness} From the plot and the recommendations, it is not possible for the user to understand what changes are necessary to improve his biological age.\\
 % \textbf{Selectivity} Again, the user cannot understand the explanations and the recommendations, which should be his main priority.\\
 % \textbf{Social} \gls{wachter}'s changes are invisible on the plot. The user needs precise physical activity control to apply these changes; thus, the explanations are unrealistic. \\
 % \textbf{Truthful} The counterfactual's level of physical activity is the same as the user's, which makes it plausible. \\
 % \textbf{Consistent with prior beliefs} From the plot, the explanation suggests that having almost the same physical activity results in a drop of twelve years for the predicted biological age (!), which is not consistent with prior beliefs.\\
-The counterfactual physical activity level corresponds to that of someone who is 34.01 years old, which is not a valid counterfactual, as valid counterfactuals need to have a biological age between 40.46 and 43.46 years old. The \gls{wachter} technique modifies slightly the physical activity recorded at every timestamp to find a counterfactual, resulting in hardly interpretable explanations. The explanations could not give any recommendations.
+The counterfactual physical activity level corresponds to that of someone who is 34.1 years old, which is not a valid counterfactual, as valid counterfactuals need to have a biological age between 40.46 and 43.46 years old. The \gls{wachter} technique modifies slightly the physical activity recorded at every timestamp to find a counterfactual, resulting in hardly interpretable explanations. The explanations could not give any recommendations.
 
 \subsubsection{\gls{nunr}}
-Figure~\ref{fig:cf:nun} displays the counterfactual outcome for patient $6306$ using the TCN model explained with the \gls{nunr} technique.
+Figure~\ref{fig:cf:nun} displays the counterfactual outcome for patient $6306$ using the \gls{tcn} model explained with the \gls{nunr} technique.
 % \textbf{Contrastiveness} The \gls{nunr} technique requires a change in the patient's everyday routine. With the recommendations, the focus is on Sunday and Wednesday mornings and Friday afternoons. \\
 % \textbf{Selectivity} The whole physical activity is highlighted, not only a subset. The text recommendations improve selectivity by giving the top three timestamps that should be changed.\\
 % \textbf{Social} Based on the plot and the recommendations, the user has to change his habits most of the day of the week.\\
 % \textbf{Truthful} Concretely, the \gls{nunr}-CF shows the physical activity of someone at least three years younger. So, as someone is doing this activity, the activity is plausible.\\
 % \textbf{Consistent with prior beliefs} Recommendations mostly suggest that the user should decrease his physical activity, but it is a common belief that doing more physical activity is healthier overall.\\
-The \gls{nunr} biological age is 42.39, which is a valid result. Based on the explanation, four recommendations were made to improve the patient's health. These include reducing activity levels on Wednesday and Sunday mornings and Saturday afternoons and increasing activity on Friday afternoons.
+The \gls{nunr} biological age is 42.39, which is a valid result. Based on the explanation, four recommendations were made to improve the patient's health; only the top three are shown in the plot. These include reducing activity levels on Wednesday and Sunday mornings and Saturday afternoons and increasing activity on Friday afternoons.
 
 \subsubsection{\gls{dbar}}
-Figure~\ref{fig:cf:dba} shows the counterfactual for patient $6306$ obtained through the TCN model with the \gls{dbar} technique.
+Figure~\ref{fig:cf:dba} shows the counterfactual for patient $6306$ obtained through the \gls{tcn} model with the \gls{dbar} technique.
 % \textbf{Contrastiveness} The plot only does not indicate necessary changes. When adding the recommendations, the focus on Friday becomes apparent.\\
 % \textbf{Selectivity} Similar to \gls{nunr}, many data points are affected by the explanations, and again, the recommendation highlights the most important subset of the physical activity.\\
 % \textbf{Social} Based on the plot and the recommendations, the user has to change his habits most of the day of the week. \\
@@ -55,7 +58,7 @@ Figure~\ref{fig:cf:dba} shows the counterfactual for patient $6306$ obtained thr
 The \gls{dbar} biological age is 43.46, which is an optimal and valid result. It is optimal because 43.46 is the closest accepted label possible. By comparing with the \gls{nunr} plot, we can observe that the \gls{dbar} technique averages between the \gls{nunr}'s physical activity and the patient's physical activity to produce a similar counterfactual, with less important changes (percentage changes are lower) but still slight changes at each time stamp. Based on the \gls{dbar}'s output, the recommender suggests only one recommendation to improve the patient's biological age: increasing physical activity on Friday afternoon. It is important to note that this was already a recommendation from the \gls{nunr} technique.
 
 \subsubsection{\gls{tsevor}}
-Figure~\ref{fig:cf:tsevo} shows a counterfactual for patient $6306$, which was obtained using the TCN model and explained with the \gls{tsevor} technique.
+Figure~\ref{fig:cf:tsevo} shows a counterfactual for patient $6306$, which was obtained using the \gls{tcn} model and explained using the \gls{tsevor} technique.
 % \textbf{Contrastiveness} The plot highlights a large area on Friday and three smaller areas on Monday, Tuesday, and Wednesday. This is then narrowed to only Friday by the text recommendation.\\
 % \textbf{Selectivity} From the plot, the user observes three main changes: Monday morning, Tuesday morning, and Friday midday. The recommendation helps the user select Friday as the main area of focus.\\
 % \textbf{Social} The recommendations are realistic as they focus mainly on one day. \\
@@ -66,7 +69,7 @@ The \gls{tsevor} biological age is 43.46, which is an optimal and valid result. 
 
 \subsection{Quantitative evaluation}
 \input{quanti_eval}
-We generated counterfactuals on the 723 samples from the test set. To generate counterfactuals, we applied the data of each sample from the test set to each of the three deep-learning models (CNN, TCN, and ConvLSTM). We then generated counterfactuals using the four different counterfactual techniques (\gls{wachter}, \gls{nunr}, \gls{dbar}, and \gls{tsevor}). Finally, we evaluate the $723\times3\times4=8676$ generated counterfactuals with the following metrics :
+We generated counterfactuals on the 723 samples from the test set. To generate counterfactuals, we first feed each sample from the test set to each of the three deep-learning models (\gls{cnn}, \gls{tcn}, and \gls{convlstm}). We then generated counterfactuals using the four different counterfactual techniques (\gls{wachter}, \gls{nunr}, \gls{dbar}, and \gls{tsevor}). Finally, we evaluate the $723\times3\times4=8676$ generated counterfactuals with the following metrics:
 \begin{itemize}
     \item \textbf{Validity}: Proportion of the 723 generated counterfactuals that are valid~(cf.~Def.~\ref{def:validity}). 
     \item \textbf{Proximity}: $L_1$ norm (Manhattan distance) between the query $x$ and the counterfactual $x^{cf}$.
@@ -80,4 +83,4 @@ We generated counterfactuals on the 723 samples from the test set. To generate c
     \item \textbf{Time}: Time needed to explain a sample.
 \end{itemize}
 
-Upon analysis, we can first observe that the best-performing explainable technique for each metric remains constant across the models, which only impacts the time aspect. Secondly, we note that the \gls{nunr} technique performs best across three out of five metrics but falls short on the proximity and sparsity metrics. Compared to \gls{nunr}, \gls{dbar} improves the proximity metric at the cost of a large drop in validity and plausibility. Thirdly, it is evident that all techniques, except for \gls{tsevor}, cannot produce sparse counterfactuals. It is also important to note that \gls{tsevor} ranks first or second in every metric except for time, where it secures third place. Moreover, when using \gls{tsevor}, the model plays a role in the validity and time metrics. Indeed, the validity drops to 0.08 when explaining the ConvLSTM model, compared to 0.37 for CNN and 0.39 for TCN, while being five times slower.
+Upon analysis, we can first observe that the best-performing explainable technique for each metric remains constant across the models, which only impacts the time aspect. Secondly, we note that the \gls{nunr} technique performs best across three out of five metrics but falls short on the proximity and sparsity metrics. Compared to \gls{nunr}, \gls{dbar} improves the proximity metric at the cost of a large drop in validity and plausibility. Thirdly, it is evident that all techniques, except for \gls{tsevor}, cannot produce sparse counterfactuals. It is also important to note that \gls{tsevor} ranks first or second in every metric except for time, where it secures third place. Moreover, when using \gls{tsevor}, the model plays a role in the validity and time metrics. Indeed, the validity drops to 0.08 when explaining the \gls{convlstm} model, compared to 0.37 for \gls{cnn} and 0.39 for \gls{tcn}, while being five times slower.
